@@ -1,0 +1,9 @@
+package com.ftn.sbnz.model.models;
+
+public enum GameplayStyle {
+    COMBAT_FOCUSED,
+    ROLE_PLAYING_AND_CHARACTER_DRIVEN,
+    PUZZLE_SOLVING_AND_ENVIRONMENTAL_CHALLENGES,
+    SANDBOX_EXPLORATION_AND_OPEN_WORLD
+}
+

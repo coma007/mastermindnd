@@ -1,0 +1,8 @@
+package cep;
+
+rule "..."
+when
+//...
+then
+//...
+end
