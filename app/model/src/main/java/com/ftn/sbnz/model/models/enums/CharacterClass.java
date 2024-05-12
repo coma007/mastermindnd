@@ -1,6 +1,6 @@
-package com.ftn.sbnz.model.models;
+package com.ftn.sbnz.model.models.enums;
 
-public enum CharacterCategory {
+public enum CharacterClass {
     PLAYER_CHARACTER,
     NON_PLAYER_CHARACTER,
     CREATURE,

@@ -1,6 +1,5 @@
 package com.ftn.sbnz.service.tests;
 
-import com.ftn.sbnz.model.models.Transaction;
 import org.junit.Test;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
