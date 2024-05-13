@@ -36,4 +36,16 @@ public class UserController {
         userActivityService.saveCampaign(campaignId, userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PutMapping("/like")
+    public ResponseEntity<String> likeCampaign(@RequestParam Long campaignId, @RequestParam Long userId) {
+        userActivityService.likeCampaign(campaignId, userId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/play")
+    public ResponseEntity<String> playCampaign(@RequestParam Long campaignId, @RequestParam Long userId) {
+        userActivityService.playCampaign(campaignId, userId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

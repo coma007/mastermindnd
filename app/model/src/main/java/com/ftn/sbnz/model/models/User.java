@@ -56,6 +56,30 @@ public class User {
         this.levelPreference.add(l);
     }
 
+    public void addThemeToHistory(Theme t) {
+        this.themeHistory.add(t);
+    }
+
+    public void addThemeToWishlist(Theme t) {
+        this.themeWishlist.add(t);
+    }
+
+    public void addThemeToPreference(Theme t) {
+        this.themePreference.add(t);
+    }
+
+    public void addStyleToHistory(GameplayStyle s) {
+        this.styleHistory.add(s);
+    }
+
+    public void addStyleToWishlist(GameplayStyle s) {
+        this.styleWishlist.add(s);
+    }
+
+    public void addStyleToPreference(GameplayStyle s) {
+        this.stylePreference.add(s);
+    }
+
     public User(String name) {
         this.name = name;
         this.historyCampaigns = new ArrayList<>();

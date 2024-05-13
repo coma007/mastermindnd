@@ -1,6 +1,8 @@
 package userActivity;
 
 import com.ftn.sbnz.model.events.SaveCampaignEvent
+import com.ftn.sbnz.model.events.LikeCampaignEvent
+import com.ftn.sbnz.model.events.PlayCampaignEvent
 import java.util.List
 import com.ftn.sbnz.model.models.enums.Level;
 
@@ -12,6 +14,48 @@ when
     )
 then
     modify($user) {
-        addLevelToWishlist($campaign.level)
+        addLevelToWishlist($campaign.getLevel())
+    };
+    modify($user) {
+        addThemeToWishlist($campaign.getTheme())
+    };
+    modify($user) {
+        addStyleToWishlist($campaign.getGameplayStyle())
+    };
+end
+
+rule "like campaign"
+when
+    LikeCampaignEvent(
+    $user: user,
+    $campaign: campaign
+    )
+then
+    modify($user) {
+        addLevelToPreference($campaign.getLevel())
+    };
+    modify($user) {
+        addThemeToPreference($campaign.getTheme())
+    };
+    modify($user) {
+        addStyleToPreference($campaign.getGameplayStyle())
+    };
+end
+
+rule "play campaign"
+when
+    PlayCampaignEvent(
+    $user: user,
+    $campaign: campaign
+    )
+then
+    modify($user) {
+        addLevelToHistory($campaign.getLevel())
+    };
+    modify($user) {
+        addThemeToHistory($campaign.getTheme())
+    };
+    modify($user) {
+        addStyleToHistory($campaign.getGameplayStyle())
     };
 end
