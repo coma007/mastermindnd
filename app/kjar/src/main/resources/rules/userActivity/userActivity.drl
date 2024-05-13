@@ -1,0 +1,17 @@
+package userActivity;
+
+import com.ftn.sbnz.model.events.SaveCampaignEvent
+import java.util.List
+import com.ftn.sbnz.model.models.enums.Level;
+
+rule "save campaign"
+when
+    SaveCampaignEvent(
+    $user: user,
+    $campaign: campaign
+    )
+then
+    modify($user) {
+        addLevelToWishlist($campaign.level)
+    };
+end

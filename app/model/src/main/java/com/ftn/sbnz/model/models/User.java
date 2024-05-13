@@ -1,5 +1,9 @@
 package com.ftn.sbnz.model.models;
 
+import com.ftn.sbnz.model.models.enums.GameplayStyle;
+import com.ftn.sbnz.model.models.enums.Level;
+import com.ftn.sbnz.model.models.enums.Theme;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -14,26 +18,158 @@ public class User {
     private String name;
 
     @ManyToMany
-    private List<Campaign> preferences;
-
+    private List<Campaign> savedCampaigns;
+    @ElementCollection
+    private List<Theme> themeWishlist;
+    @ElementCollection
+    private List<Level> levelWishlist;
+    @ElementCollection
+    private List<GameplayStyle> styleWishlist;
     @ManyToMany
-    private List<Campaign> wishlist;
-
+    private List<Campaign> likedCampaigns;
+    @ElementCollection
+    private List<Theme> themePreference;
+    @ElementCollection
+    private List<Level> levelPreference;
+    @ElementCollection
+    private List<GameplayStyle> stylePreference;
     @ManyToMany
-    private List<Campaign> history;
-
+    private List<Campaign> historyCampaigns;
+    @ElementCollection
+    private List<Theme> themeHistory;
+    @ElementCollection
+    private List<Level> levelHistory;
+    @ElementCollection
+    private List<GameplayStyle> styleHistory;
     @ManyToMany
     private List<Rating> ratings;
 
+    public void addLevelToHistory(Level l) {
+        this.levelHistory.add(l);
+    }
+
+    public void addLevelToWishlist(Level l) {
+        this.levelWishlist.add(l);
+    }
+
+    public void addLevelToPreference(Level l) {
+        this.levelPreference.add(l);
+    }
+
     public User(String name) {
         this.name = name;
-        this.preferences = new ArrayList<>();
-        this.wishlist = new ArrayList<>();
-        this.history = new ArrayList<>();
+        this.historyCampaigns = new ArrayList<>();
+        this.likedCampaigns = new ArrayList<>();
+        this.savedCampaigns = new ArrayList<>();
+        this.themeHistory = new ArrayList<>();
+        this.themePreference = new ArrayList<>();
+        this.themeWishlist = new ArrayList<>();
+        this.levelHistory = new ArrayList<>();
+        this.levelPreference = new ArrayList<>();
+        this.levelWishlist = new ArrayList<>();
+        this.styleHistory = new ArrayList<>();
+        this.stylePreference = new ArrayList<>();
+        this.styleWishlist = new ArrayList<>();
         this.ratings = new ArrayList<>();
     }
 
     public User() {
+    }
+
+    public List<Campaign> getSavedCampaigns() {
+        return savedCampaigns;
+    }
+
+    public void setSavedCampaigns(List<Campaign> savedCampaigns) {
+        this.savedCampaigns = savedCampaigns;
+    }
+
+    public List<Theme> getThemeWishlist() {
+        return themeWishlist;
+    }
+
+    public void setThemeWishlist(List<Theme> themeWishlist) {
+        this.themeWishlist = themeWishlist;
+    }
+
+    public List<Level> getLevelWishlist() {
+        return levelWishlist;
+    }
+
+    public void setLevelWishlist(List<Level> levelWishlist) {
+        this.levelWishlist = levelWishlist;
+    }
+
+    public List<GameplayStyle> getStyleWishlist() {
+        return styleWishlist;
+    }
+
+    public void setStyleWishlist(List<GameplayStyle> styleWishlist) {
+        this.styleWishlist = styleWishlist;
+    }
+
+    public List<Campaign> getLikedCampaigns() {
+        return likedCampaigns;
+    }
+
+    public void setLikedCampaigns(List<Campaign> likedCampaigns) {
+        this.likedCampaigns = likedCampaigns;
+    }
+
+    public List<Theme> getThemePreference() {
+        return themePreference;
+    }
+
+    public void setThemePreference(List<Theme> themePreference) {
+        this.themePreference = themePreference;
+    }
+
+    public List<Level> getLevelPreference() {
+        return levelPreference;
+    }
+
+    public void setLevelPreference(List<Level> levelPreference) {
+        this.levelPreference = levelPreference;
+    }
+
+    public List<GameplayStyle> getStylePreference() {
+        return stylePreference;
+    }
+
+    public void setStylePreference(List<GameplayStyle> stylePreference) {
+        this.stylePreference = stylePreference;
+    }
+
+    public List<Campaign> getHistoryCampaigns() {
+        return historyCampaigns;
+    }
+
+    public void setHistoryCampaigns(List<Campaign> historyCampaigns) {
+        this.historyCampaigns = historyCampaigns;
+    }
+
+    public List<Theme> getThemeHistory() {
+        return themeHistory;
+    }
+
+    public void setThemeHistory(List<Theme> themeHistory) {
+        this.themeHistory = themeHistory;
+    }
+
+    public List<Level> getLevelHistory() {
+        return levelHistory;
+    }
+
+    public void setLevelHistory(List<Level> levelHistory) {
+        this.levelHistory = levelHistory;
+    }
+
+    public List<GameplayStyle> getStyleHistory() {
+        return styleHistory;
+    }
+
+    public void setStyleHistory(List<GameplayStyle> styleHistory) {
+        this.styleHistory = styleHistory;
     }
 
     public Long getId() {
@@ -50,30 +186,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Campaign> getPreferences() {
-        return preferences;
-    }
-
-    public void setPreferences(List<Campaign> preferences) {
-        this.preferences = preferences;
-    }
-
-    public List<Campaign> getWishlist() {
-        return wishlist;
-    }
-
-    public void setWishlist(List<Campaign> wishlist) {
-        this.wishlist = wishlist;
-    }
-
-    public List<Campaign> getHistory() {
-        return history;
-    }
-
-    public void setHistory(List<Campaign> history) {
-        this.history = history;
     }
 
     public List<Rating> getRatings() {
