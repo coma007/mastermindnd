@@ -1,22 +1,25 @@
 package com.ftn.sbnz.model.events;
 
+import com.ftn.sbnz.model.events.enums.AddCampaignType;
 import com.ftn.sbnz.model.models.Campaign;
 import com.ftn.sbnz.model.models.User;
 import org.kie.api.definition.type.Role;
 
 @Role(Role.Type.EVENT)
-public class SaveCampaignEvent {
+public class AddCampaignEvent {
     private Long id;
     private Campaign campaign;
     private User user;
+    private AddCampaignType type;
 
-    public SaveCampaignEvent() {
+    public AddCampaignEvent() {
     }
 
-    public SaveCampaignEvent(Long id, Campaign campaign, User user) {
+    public AddCampaignEvent(Long id, Campaign campaign, User user, AddCampaignType type) {
         this.id = id;
         this.campaign = campaign;
         this.user = user;
+        this.type = type;
     }
 
     public Long getId() {
@@ -41,5 +44,13 @@ public class SaveCampaignEvent {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public AddCampaignType getType() {
+        return type;
+    }
+
+    public void setType(AddCampaignType type) {
+        this.type = type;
     }
 }

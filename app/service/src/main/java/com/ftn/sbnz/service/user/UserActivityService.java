@@ -1,17 +1,15 @@
 package com.ftn.sbnz.service.user;
 
-import com.ftn.sbnz.model.events.LikeCampaignEvent;
-import com.ftn.sbnz.model.events.PlayCampaignEvent;
-import com.ftn.sbnz.model.events.SaveCampaignEvent;
+import com.ftn.sbnz.model.events.AddCampaignEvent;
+import com.ftn.sbnz.model.events.enums.AddCampaignType;
 import com.ftn.sbnz.model.models.Campaign;
 import com.ftn.sbnz.model.models.User;
 import com.ftn.sbnz.service.campaign.CampaignService;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import org.kie.api.runtime.KieSession;
 
 @Service
 public class UserActivityService {
@@ -36,9 +34,10 @@ public class UserActivityService {
         KieContainer kContainer = ks.getKieClasspathContainer();
         KieSession ksession = kContainer.newKieSession("userActivity");
 
-        SaveCampaignEvent e = new SaveCampaignEvent();
+        AddCampaignEvent e = new AddCampaignEvent();
         e.setCampaign(campaign);
         e.setUser(user);
+        e.setType(AddCampaignType.SAVE);
         ksession.insert(user);
         ksession.insert(e);
         ksession.fireAllRules();
@@ -60,9 +59,10 @@ public class UserActivityService {
         KieContainer kContainer = ks.getKieClasspathContainer();
         KieSession ksession = kContainer.newKieSession("userActivity");
 
-        LikeCampaignEvent e = new LikeCampaignEvent();
+        AddCampaignEvent e = new AddCampaignEvent();
         e.setCampaign(campaign);
         e.setUser(user);
+        e.setType(AddCampaignType.LIKE);
         ksession.insert(user);
         ksession.insert(e);
         ksession.fireAllRules();
@@ -84,9 +84,10 @@ public class UserActivityService {
         KieContainer kContainer = ks.getKieClasspathContainer();
         KieSession ksession = kContainer.newKieSession("userActivity");
 
-        PlayCampaignEvent e = new PlayCampaignEvent();
+        AddCampaignEvent e = new AddCampaignEvent();
         e.setCampaign(campaign);
         e.setUser(user);
+        e.setType(AddCampaignType.PLAY);
         ksession.insert(user);
         ksession.insert(e);
         ksession.fireAllRules();

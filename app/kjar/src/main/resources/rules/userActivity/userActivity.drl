@@ -1,16 +1,16 @@
 package userActivity;
 
-import com.ftn.sbnz.model.events.SaveCampaignEvent
-import com.ftn.sbnz.model.events.LikeCampaignEvent
-import com.ftn.sbnz.model.events.PlayCampaignEvent
+import com.ftn.sbnz.model.events.enums.AddCampaignType
+import com.ftn.sbnz.model.events.AddCampaignEvent
 import java.util.List
 import com.ftn.sbnz.model.models.enums.Level;
 
 rule "save campaign"
 when
-    SaveCampaignEvent(
+    AddCampaignEvent(
     $user: user,
-    $campaign: campaign
+    $campaign: campaign,
+    type == AddCampaignType.SAVE
     )
 then
     modify($user) {
@@ -26,9 +26,10 @@ end
 
 rule "like campaign"
 when
-    LikeCampaignEvent(
+    AddCampaignEvent(
     $user: user,
-    $campaign: campaign
+    $campaign: campaign,
+    type == AddCampaignType.LIKE
     )
 then
     modify($user) {
@@ -44,9 +45,10 @@ end
 
 rule "play campaign"
 when
-    PlayCampaignEvent(
+    AddCampaignEvent(
     $user: user,
-    $campaign: campaign
+    $campaign: campaign,
+    type == AddCampaignType.PLAY
     )
 then
     modify($user) {
