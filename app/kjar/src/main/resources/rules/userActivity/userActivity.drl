@@ -3,10 +3,18 @@ package userActivity;
 import com.ftn.sbnz.model.events.enums.AddCampaignType
 import com.ftn.sbnz.model.events.AddCampaignEvent
 import java.util.List
+import java.util.Map
 import com.ftn.sbnz.model.models.enums.Level;
+import com.ftn.sbnz.model.models.User;
+import com.ftn.sbnz.model.models.Campaign;
+
+import static java.util.stream.Collectors.*
+import java.util.HashMap
+import com.ftn.sbnz.model.models.enums.GameplayStyle
+import com.ftn.sbnz.model.models.enums.Theme;
 
 rule "save campaign"
-when
+no-loop when
     AddCampaignEvent(
     $user: user,
     $campaign: campaign,
@@ -25,7 +33,7 @@ then
 end
 
 rule "like campaign"
-when
+no-loop when
     AddCampaignEvent(
     $user: user,
     $campaign: campaign,
@@ -44,7 +52,7 @@ then
 end
 
 rule "play campaign"
-when
+no-loop when
     AddCampaignEvent(
     $user: user,
     $campaign: campaign,
@@ -60,4 +68,115 @@ then
     modify($user) {
         addStyleToHistory($campaign.getGameplayStyle())
     };
+end
+
+rule 'is ready for recommendation from history'
+no-loop when
+    $user:User(
+    $historyThemes:themeHistory,
+    $historyLevel:levelHistory,
+    $historyStyle:styleHistory,
+    $recommendedCampaigns:recommendedCampaigns
+    )
+    Number(intValue % 2 == 0, intValue != 0) from $historyThemes.size()
+    $campaigns : List() from collect(Campaign())
+then
+    Object style = $historyStyle.get($historyStyle.size()-1);
+    Object level = $historyLevel.get($historyLevel.size()-1);
+    Object theme = $historyThemes.get($historyThemes.size()-1);
+    Campaign cam = null;
+    for (Object o : $campaigns) {
+        Campaign c = (Campaign) o;
+        if (c.getGameplayStyle() == (GameplayStyle)style
+        && c.getLevel() == (Level) level
+        && c.getTheme() == (Theme)theme)
+            {
+                cam = c;
+                break;
+            }
+    }
+    modify($user){recommendNew(cam)}
+    modify($user) {
+        addLevelToHistory(level)
+    };
+    modify($user) {
+        addThemeToHistory(theme)
+    };
+    modify($user) {
+        addStyleToHistory(style)
+    };
+end
+
+rule 'is ready for recommendation from wishlist'
+no-loop when
+    $user:User(
+    $wishlistThemes:themeWishlist,
+    $wishlistLevel:levelWishlist,
+    $wishlistStyle:styleWishlist,
+    $recommendation:recommendedCampaigns
+    )
+    Number(intValue % 2 == 0, intValue != 0) from $wishlistThemes.size()
+    $campaigns : List() from collect(Campaign())
+then
+        Object style = $wishlistStyle.get($wishlistStyle.size()-1);
+        Object level = $wishlistLevel.get($wishlistLevel.size()-1);
+        Object theme = $wishlistThemes.get($wishlistThemes.size()-1);
+        Campaign cam = null;
+        for (Object o : $campaigns) {
+            Campaign c = (Campaign) o;
+            if (c.getGameplayStyle() == (GameplayStyle)style
+            && c.getLevel() == (Level) level
+            && c.getTheme() == (Theme)theme)
+                {
+                    cam = c;
+                    break;
+                }
+        }
+        modify($user){recommendNew(cam)}
+        modify($user) {
+            addLevelToWishlist(level)
+        };
+        modify($user) {
+            addThemeToWishlist(theme)
+        };
+        modify($user) {
+            addStyleToWishlist(style)
+        };
+end
+
+rule 'is ready for recommendation from preference'
+no-loop when
+    $user:User(
+    $preferenceThemes:themePreference,
+    $preferenceLevel:levelPreference,
+    $preferenceStyle:stylePreference,
+    $recommendation:recommendedCampaigns
+    )
+    Number(intValue % 2 == 0, intValue != 0) from $preferenceThemes.size()
+    $campaigns : List() from collect(Campaign())
+then
+        GameplayStyle style = (GameplayStyle) $preferenceStyle.get($preferenceStyle.size()-1);
+        Level level = (Level) $preferenceLevel.get($preferenceLevel.size()-1);
+        Theme theme = (Theme) $preferenceThemes.get($preferenceThemes.size()-1);
+        Campaign cam = null;
+        for (Object o : $campaigns) {
+            Campaign c = (Campaign) o;
+            if (c.getGameplayStyle() == style
+            && c.getLevel() == level
+            && c.getTheme() == theme)
+                {
+                    cam = c;
+                    break;
+                }
+        }
+        modify($user){recommendNew(cam)};
+        modify($user) {
+            addLevelToPreference(level)
+        };
+        modify($user) {
+            addThemeToPreference(theme)
+        };
+        modify($user) {
+            addStyleToPreference(style)
+        };
 end

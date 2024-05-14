@@ -11,6 +11,8 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserActivityService {
 
@@ -38,8 +40,14 @@ public class UserActivityService {
         e.setCampaign(campaign);
         e.setUser(user);
         e.setType(AddCampaignType.SAVE);
+
+        List<Campaign> campaigns = campaignService.findAll();
+
         ksession.insert(user);
         ksession.insert(e);
+        for (Campaign c : campaigns) {
+            ksession.insert(c);
+        }
         ksession.fireAllRules();
 
         repository.save(user);
@@ -61,10 +69,16 @@ public class UserActivityService {
 
         AddCampaignEvent e = new AddCampaignEvent();
         e.setCampaign(campaign);
+
+        List<Campaign> campaigns = campaignService.findAll();
+
         e.setUser(user);
         e.setType(AddCampaignType.LIKE);
         ksession.insert(user);
         ksession.insert(e);
+        for (Campaign c : campaigns) {
+            ksession.insert(c);
+        }
         ksession.fireAllRules();
 
         repository.save(user);
@@ -88,8 +102,14 @@ public class UserActivityService {
         e.setCampaign(campaign);
         e.setUser(user);
         e.setType(AddCampaignType.PLAY);
+
+        List<Campaign> campaigns = campaignService.findAll();
+
         ksession.insert(user);
         ksession.insert(e);
+        for (Campaign c : campaigns) {
+            ksession.insert(c);
+        }
         ksession.fireAllRules();
 
         repository.save(user);

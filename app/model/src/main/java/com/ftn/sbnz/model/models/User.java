@@ -43,6 +43,15 @@ public class User {
     private List<GameplayStyle> styleHistory;
     @ManyToMany
     private List<Rating> ratings;
+    @ManyToMany
+    private List<Campaign> recommendedCampaigns;
+    private boolean recommendNewFromHistory;
+    private boolean recommendNewFromPreference;
+    private boolean recommendNewFromWishlist;
+
+    public void recommendNew(Campaign c) {
+        this.recommendedCampaigns.add(c);
+    }
 
     public void addLevelToHistory(Level l) {
         this.levelHistory.add(l);
@@ -82,6 +91,7 @@ public class User {
 
     public User(String name) {
         this.name = name;
+        this.recommendedCampaigns = new ArrayList<>();
         this.historyCampaigns = new ArrayList<>();
         this.likedCampaigns = new ArrayList<>();
         this.savedCampaigns = new ArrayList<>();
@@ -95,6 +105,9 @@ public class User {
         this.stylePreference = new ArrayList<>();
         this.styleWishlist = new ArrayList<>();
         this.ratings = new ArrayList<>();
+        this.recommendNewFromHistory = false;
+        this.recommendNewFromWishlist = false;
+        this.recommendNewFromPreference = false;
     }
 
     public User() {
@@ -218,5 +231,37 @@ public class User {
 
     public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
+    }
+
+    public List<Campaign> getRecommendedCampaigns() {
+        return recommendedCampaigns;
+    }
+
+    public void setRecommendedCampaigns(List<Campaign> recommendedCampaigns) {
+        this.recommendedCampaigns = recommendedCampaigns;
+    }
+
+    public boolean isRecommendNewFromHistory() {
+        return recommendNewFromHistory;
+    }
+
+    public void setRecommendNewFromHistory(boolean recommendNew) {
+        this.recommendNewFromHistory = recommendNew;
+    }
+
+    public boolean isRecommendNewFromPreference() {
+        return recommendNewFromPreference;
+    }
+
+    public void setRecommendNewFromPreference(boolean recommendNewFromPreference) {
+        this.recommendNewFromPreference = recommendNewFromPreference;
+    }
+
+    public boolean isRecommendNewFromWishlist() {
+        return recommendNewFromWishlist;
+    }
+
+    public void setRecommendNewFromWishlist(boolean recommendNewFromWishlist) {
+        this.recommendNewFromWishlist = recommendNewFromWishlist;
     }
 }
