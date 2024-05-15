@@ -13,12 +13,11 @@ public class DnDCharacter {
     private Long id;
 
     private Integer hitPoints;
-    private Integer experiencePoints;
+    private Integer xp;
     private String name;
     private String race;
     private CharacterClass characterClass;
     private Integer level;
-    private Integer xp;
     @OneToOne()
     private Attributes attributes;
     private Integer hits;
@@ -35,7 +34,7 @@ public class DnDCharacter {
         this.race = race;
         this.characterClass = characterClass;
         this.level = level;
-        this.experiencePoints = xp;
+        this.xp = xp;
         this.attributes = attributes;
         this.hitPoints = hits;
         this.armorClass = armorClass;
@@ -59,12 +58,12 @@ public class DnDCharacter {
         this.hitPoints = hitPoints;
     }
 
-    public Integer getExperiencePoints() {
-        return experiencePoints;
+    public Integer getXp() {
+        return xp;
     }
 
-    public void setExperiencePoints(Integer experiencePoints) {
-        this.experiencePoints = experiencePoints;
+    public void setXp(Integer xp) {
+        this.xp = xp;
     }
 
     public String getName() {
@@ -99,13 +98,6 @@ public class DnDCharacter {
         this.level = level;
     }
 
-    public Integer getXp() {
-        return xp;
-    }
-
-    public void setXp(Integer xp) {
-        this.xp = xp;
-    }
 
     public Attributes getAttributes() {
         return attributes;
