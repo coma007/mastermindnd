@@ -151,17 +151,102 @@ then
     modify($user){recommendNew(cam)}
 end
 
-rule 'playing a lot in the last month, here is some more'
-when
-    $user : User()
-    $theme : Theme()
+rule 'playing a lot of the same difficulty in the last month, here is some more'
+no-loop when
+    $user: User()
+    $history: UserActivity(recommendedThisMonth == false) from $user.getHistory()
+    $campaigns : List() from collect(Campaign())
+    $e: AddCampaignEvent(
+        $user == user,
+        $campaign: campaign,
+        type == AddCampaignType.PLAY
+        )
+        $level: Level() from $campaign.getLevel()
     Number(intValue > 1) from accumulate(
-    $event: AddCampaignEvent(
-    $user == user,
-    $theme == campaign.getTheme(),
-    type == AddCampaignType.SAVE),
-    count($event)
+        $event: AddCampaignEvent(
+        $user == user,
+        $level == campaign.getLevel(),
+        type == AddCampaignType.PLAY,
+        $e != this, this after[2s, 30d] $e),
+        count($event)
     )
 then
-    System.out.println("Enough events");
+    Campaign cam = null;
+    for (Object o : $campaigns) {
+        Campaign c = (Campaign) o;
+        if (c.getLevel() == $level)
+            {
+                cam = c;
+                break;
+            }
+    }
+    modify($user){recommendNew(cam)}
+    modify($history){setRecommendedThisMonth(true)};
+end
+
+rule 'playing a lot of the same theme in the last month, here is some more'
+no-loop when
+    $user: User()
+    $history: UserActivity(recommendedThisMonth == false) from $user.getHistory()
+    $campaigns : List() from collect(Campaign())
+    $e: AddCampaignEvent(
+        $user == user,
+        $campaign: campaign,
+        type == AddCampaignType.PLAY
+        )
+        $theme: Theme() from $campaign.getTheme()
+        Number(intValue > 1) from accumulate(
+        $event: AddCampaignEvent(
+        $user == user,
+        $theme == campaign.getTheme(),
+        type == AddCampaignType.PLAY,
+        $e != this, this after[2s, 30d] $e),
+        count($event)
+    )
+then
+    Campaign cam = null;
+    for (Object o : $campaigns) {
+        Campaign c = (Campaign) o;
+        if (c.getTheme() == $theme)
+            {
+                cam = c;
+                break;
+            }
+    }
+    modify($user){recommendNew(cam)}
+    modify($history){setRecommendedThisMonth(true)};
+end
+
+
+rule 'playing a lot of the same style in the last month, here is some more'
+no-loop when
+    $user: User()
+    $history: UserActivity(recommendedThisMonth == false) from $user.getHistory()
+    $campaigns : List() from collect(Campaign())
+    $e: AddCampaignEvent(
+        $user == user,
+        $campaign: campaign,
+        type == AddCampaignType.PLAY
+        )
+        $style: GameplayStyle() from $campaign.getGameplayStyle()
+    Number(intValue > 1) from accumulate(
+        $event: AddCampaignEvent(
+        $user == user,
+        $style == campaign.getGameplayStyle(),
+        type == AddCampaignType.PLAY,
+        $e != this, this after[2s, 30d] $e),
+        count($event)
+    )
+then
+    Campaign cam = null;
+    for (Object o : $campaigns) {
+        Campaign c = (Campaign) o;
+        if (c.getGameplayStyle() == $style)
+            {
+                cam = c;
+                break;
+            }
+    }
+    modify($user){recommendNew(cam)}
+    modify($history){setRecommendedThisMonth(true)};
 end

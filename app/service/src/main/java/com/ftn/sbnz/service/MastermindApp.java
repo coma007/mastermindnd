@@ -30,11 +30,11 @@ public class MastermindApp {
     }
 
 //    @Bean
-//    public KieSession getKieSession() {
-//        KieServices ks = KieServices.Factory.get();
-//        KieContainer kContainer = ks.getKieClasspathContainer();
-//        KieSession ksession = kContainer.newKieSession("ksessionRealtimeClock");
-//        return ksession;
+//    public KieSession getUserActivityKieSession() {
+//    KieServices ks = KieServices.Factory.get();
+//    KieContainer kContainer = ks.getKieClasspathContainer();
+//    KieSession ksession = kContainer.newKieSession("userActivity");
+//    return ksession;
 //    }
 }
 

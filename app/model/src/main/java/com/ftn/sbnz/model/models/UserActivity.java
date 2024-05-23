@@ -28,6 +28,7 @@ public class UserActivity {
     private Level bestLevel;
     private Theme bestTheme;
     private GameplayStyle bestStyle;
+    private boolean recommendedThisMonth;
     
     public void addLevel(Level l) {
         this.levels.add(l);
@@ -61,12 +62,13 @@ public class UserActivity {
         this.addStyle(c.getGameplayStyle());
         this.addTheme(c.getTheme());
     }
-    public UserActivity(Long id, List<Campaign> campaigns, List<Theme> themes, List<Level> levels, List<GameplayStyle> styles) {
+    public UserActivity(Long id, List<Campaign> campaigns, List<Theme> themes, List<Level> levels, List<GameplayStyle> styles, boolean recommendedThisMonth) {
         this.id = id;
         this.campaigns = campaigns;
         this.themes = themes;
         this.levels = levels;
         this.styles = styles;
+        this.recommendedThisMonth = recommendedThisMonth;
     }
 
     public UserActivity() {
@@ -74,6 +76,7 @@ public class UserActivity {
         this.levels = new ArrayList<>();
         this.themes = new ArrayList<>();
         this.styles = new ArrayList<>();
+        this.recommendedThisMonth = false;
     }
 
     public Long getId() {
@@ -138,6 +141,14 @@ public class UserActivity {
 
     public void setBestStyle(GameplayStyle bestStyle) {
         this.bestStyle = bestStyle;
+    }
+
+    public boolean isRecommendedThisMonth() {
+        return recommendedThisMonth;
+    }
+
+    public void setRecommendedThisMonth(boolean recommendedThisMonth) {
+        this.recommendedThisMonth = recommendedThisMonth;
     }
 
     private <T> T findMostCommon(List<T> list) {

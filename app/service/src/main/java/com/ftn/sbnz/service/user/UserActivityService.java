@@ -5,10 +5,12 @@ import com.ftn.sbnz.model.events.enums.AddCampaignType;
 import com.ftn.sbnz.model.models.Campaign;
 import com.ftn.sbnz.model.models.User;
 import com.ftn.sbnz.service.campaign.CampaignService;
+import com.ftn.sbnz.service.kie_session.KSessionService;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,19 +20,17 @@ public class UserActivityService {
 
     @Autowired
     private IUserRepository repository;
-
     @Autowired
     private CampaignService campaignService;
+    @Autowired
+    private KSessionService userActivityServiceSession;
+
 
     public void saveCampaign(Long campaignId, Long userId) {
         Campaign campaign = campaignService.findById(campaignId);
         if (campaign == null) return;
         User user = repository.findById(userId).orElse(null);
         if (user == null) return;
-
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kContainer = ks.getKieClasspathContainer();
-        KieSession ksession = kContainer.newKieSession("userActivity");
 
         AddCampaignEvent e = new AddCampaignEvent();
         e.setCampaign(campaign);
@@ -39,17 +39,16 @@ public class UserActivityService {
 
         List<Campaign> campaigns = campaignService.findAll();
 
-        ksession.insert(user);
-        ksession.insert(user.getCurrentPreferences());
-        ksession.insert(user.getHistory());
-        ksession.insert(user.getPreference());
-        ksession.insert(user.getWishlist());
-        ksession.insert(e);
+        userActivityServiceSession.getUserActivitySession().insert(user);
+        userActivityServiceSession.getUserActivitySession().insert(user.getCurrentPreferences());
+        userActivityServiceSession.getUserActivitySession().insert(user.getHistory());
+        userActivityServiceSession.getUserActivitySession().insert(user.getPreference());
+        userActivityServiceSession.getUserActivitySession().insert(user.getWishlist());
+        userActivityServiceSession.getUserActivitySession().insert(e);
         for (Campaign c : campaigns) {
-            ksession.insert(c);
+            userActivityServiceSession.getUserActivitySession().insert(c);
         }
-        ksession.fireAllRules();
-
+        userActivityServiceSession.getUserActivitySession().fireAllRules();
         repository.save(user);
     }
 
@@ -59,9 +58,6 @@ public class UserActivityService {
         User user = repository.findById(userId).orElse(null);
         if (user == null) return;
 
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kContainer = ks.getKieClasspathContainer();
-        KieSession ksession = kContainer.newKieSession("userActivity");
 
         AddCampaignEvent e = new AddCampaignEvent();
         e.setCampaign(campaign);
@@ -70,16 +66,16 @@ public class UserActivityService {
 
         List<Campaign> campaigns = campaignService.findAll();
 
-        ksession.insert(user);
-        ksession.insert(user.getCurrentPreferences());
-        ksession.insert(user.getHistory());
-        ksession.insert(user.getPreference());
-        ksession.insert(user.getWishlist());
-        ksession.insert(e);
+        userActivityServiceSession.getUserActivitySession().insert(user);
+        userActivityServiceSession.getUserActivitySession().insert(user.getCurrentPreferences());
+        userActivityServiceSession.getUserActivitySession().insert(user.getHistory());
+        userActivityServiceSession.getUserActivitySession().insert(user.getPreference());
+        userActivityServiceSession.getUserActivitySession().insert(user.getWishlist());
+        userActivityServiceSession.getUserActivitySession().insert(e);
         for (Campaign c : campaigns) {
-            ksession.insert(c);
+            userActivityServiceSession.getUserActivitySession().insert(c);
         }
-        ksession.fireAllRules();
+        userActivityServiceSession.getUserActivitySession().fireAllRules();
 
         repository.save(user);
     }
@@ -90,10 +86,6 @@ public class UserActivityService {
         User user = repository.findById(userId).orElse(null);
         if (user == null) return;
 
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kContainer = ks.getKieClasspathContainer();
-        KieSession ksession = kContainer.newKieSession("userActivity");
-
         AddCampaignEvent e = new AddCampaignEvent();
         e.setCampaign(campaign);
         e.setUser(user);
@@ -101,16 +93,17 @@ public class UserActivityService {
 
         List<Campaign> campaigns = campaignService.findAll();
 
-        ksession.insert(user);
-        ksession.insert(user.getCurrentPreferences());
-        ksession.insert(user.getHistory());
-        ksession.insert(user.getPreference());
-        ksession.insert(user.getWishlist());
-        ksession.insert(e);
+        KieSession session = userActivityServiceSession.getUserActivitySession();
+        session.insert(user);
+        session.insert(user.getCurrentPreferences());
+        session.insert(user.getHistory());
+        session.insert(user.getPreference());
+        session.insert(user.getWishlist());
+        session.insert(e);
         for (Campaign c : campaigns) {
-            ksession.insert(c);
+            session.insert(c);
         }
-        ksession.fireAllRules();
+        session.fireAllRules();
 
         repository.save(user);
     }
