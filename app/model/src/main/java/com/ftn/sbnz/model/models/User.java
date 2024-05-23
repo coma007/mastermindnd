@@ -24,30 +24,6 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     private UserActivity history;
     @ManyToMany
-    private List<Campaign> savedCampaigns;
-    @ElementCollection
-    private List<Theme> themeWishlist;
-    @ElementCollection
-    private List<Level> levelWishlist;
-    @ElementCollection
-    private List<GameplayStyle> styleWishlist;
-    @ManyToMany
-    private List<Campaign> likedCampaigns;
-    @ElementCollection
-    private List<Theme> themePreference;
-    @ElementCollection
-    private List<Level> levelPreference;
-    @ElementCollection
-    private List<GameplayStyle> stylePreference;
-    @ManyToMany
-    private List<Campaign> historyCampaigns;
-    @ElementCollection
-    private List<Theme> themeHistory;
-    @ElementCollection
-    private List<Level> levelHistory;
-    @ElementCollection
-    private List<GameplayStyle> styleHistory;
-    @ManyToMany
     private List<Rating> ratings;
     @ManyToMany
     private List<Campaign> recommendedCampaigns;
@@ -58,43 +34,6 @@ public class User {
     public void recommendNew(Campaign c) {
         this.recommendedCampaigns.add(c);
     }
-
-    public void addLevelToHistory(Level l) {
-        this.levelHistory.add(l);
-    }
-
-    public void addLevelToWishlist(Level l) {
-        this.levelWishlist.add(l);
-    }
-
-    public void addLevelToPreference(Level l) {
-        this.levelPreference.add(l);
-    }
-
-    public void addThemeToHistory(Theme t) {
-        this.themeHistory.add(t);
-    }
-
-    public void addThemeToWishlist(Theme t) {
-        this.themeWishlist.add(t);
-    }
-
-    public void addThemeToPreference(Theme t) {
-        this.themePreference.add(t);
-    }
-
-    public void addStyleToHistory(GameplayStyle s) {
-        this.styleHistory.add(s);
-    }
-
-    public void addStyleToWishlist(GameplayStyle s) {
-        this.styleWishlist.add(s);
-    }
-
-    public void addStyleToPreference(GameplayStyle s) {
-        this.stylePreference.add(s);
-    }
-
     public User(String name) {
         this.name = name;
         this.recommendedCampaigns = new ArrayList<>();
@@ -150,102 +89,6 @@ public class User {
 
     public void setHistory(UserActivity history) {
         this.history = history;
-    }
-
-    public List<Campaign> getSavedCampaigns() {
-        return savedCampaigns;
-    }
-
-    public void setSavedCampaigns(List<Campaign> savedCampaigns) {
-        this.savedCampaigns = savedCampaigns;
-    }
-
-    public List<Theme> getThemeWishlist() {
-        return themeWishlist;
-    }
-
-    public void setThemeWishlist(List<Theme> themeWishlist) {
-        this.themeWishlist = themeWishlist;
-    }
-
-    public List<Level> getLevelWishlist() {
-        return levelWishlist;
-    }
-
-    public void setLevelWishlist(List<Level> levelWishlist) {
-        this.levelWishlist = levelWishlist;
-    }
-
-    public List<GameplayStyle> getStyleWishlist() {
-        return styleWishlist;
-    }
-
-    public void setStyleWishlist(List<GameplayStyle> styleWishlist) {
-        this.styleWishlist = styleWishlist;
-    }
-
-    public List<Campaign> getLikedCampaigns() {
-        return likedCampaigns;
-    }
-
-    public void setLikedCampaigns(List<Campaign> likedCampaigns) {
-        this.likedCampaigns = likedCampaigns;
-    }
-
-    public List<Theme> getThemePreference() {
-        return themePreference;
-    }
-
-    public void setThemePreference(List<Theme> themePreference) {
-        this.themePreference = themePreference;
-    }
-
-    public List<Level> getLevelPreference() {
-        return levelPreference;
-    }
-
-    public void setLevelPreference(List<Level> levelPreference) {
-        this.levelPreference = levelPreference;
-    }
-
-    public List<GameplayStyle> getStylePreference() {
-        return stylePreference;
-    }
-
-    public void setStylePreference(List<GameplayStyle> stylePreference) {
-        this.stylePreference = stylePreference;
-    }
-
-    public List<Campaign> getHistoryCampaigns() {
-        return historyCampaigns;
-    }
-
-    public void setHistoryCampaigns(List<Campaign> historyCampaigns) {
-        this.historyCampaigns = historyCampaigns;
-    }
-
-    public List<Theme> getThemeHistory() {
-        return themeHistory;
-    }
-
-    public void setThemeHistory(List<Theme> themeHistory) {
-        this.themeHistory = themeHistory;
-    }
-
-    public List<Level> getLevelHistory() {
-        return levelHistory;
-    }
-
-    public void setLevelHistory(List<Level> levelHistory) {
-        this.levelHistory = levelHistory;
-    }
-
-    public List<GameplayStyle> getStyleHistory() {
-        return styleHistory;
-    }
-
-    public void setStyleHistory(List<GameplayStyle> styleHistory) {
-        this.styleHistory = styleHistory;
     }
 
     public Long getId() {
