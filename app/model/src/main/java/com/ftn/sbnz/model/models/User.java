@@ -37,18 +37,6 @@ public class User {
     public User(String name) {
         this.name = name;
         this.recommendedCampaigns = new ArrayList<>();
-        this.historyCampaigns = new ArrayList<>();
-        this.likedCampaigns = new ArrayList<>();
-        this.savedCampaigns = new ArrayList<>();
-        this.themeHistory = new ArrayList<>();
-        this.themePreference = new ArrayList<>();
-        this.themeWishlist = new ArrayList<>();
-        this.levelHistory = new ArrayList<>();
-        this.levelPreference = new ArrayList<>();
-        this.levelWishlist = new ArrayList<>();
-        this.styleHistory = new ArrayList<>();
-        this.stylePreference = new ArrayList<>();
-        this.styleWishlist = new ArrayList<>();
         this.ratings = new ArrayList<>();
         this.currentPreferences = new UserPreferences();
         this.history = new UserActivity();
