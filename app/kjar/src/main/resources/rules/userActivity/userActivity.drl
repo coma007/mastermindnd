@@ -256,13 +256,17 @@ no-loop
 when
     $campaign: Campaign()
     $user: User()
-    $preference: UserActivity() from $user.getPreference()
-    $preferredLevels: List() from $preference.getLevels()
-    $preferredStyles: List() from $preference.getStyles()
-    $preferredThemes: List() from $preference.getThemes()
-    eval($preferredLevels.contains($campaign.getLevel()) ||
-         $preferredStyles.contains($campaign.getGameplayStyle()) ||
-         $preferredThemes.contains($campaign.getTheme()))
+    $preference: UserActivity(
+    $preferredLevels: getLevels(),
+    $preferredStyles: getStyles(),
+    $preferredThemes: getThemes()
+    ) from $user.getPreference()
 then
-    modify($user){recommendNew($campaign)}
+    if(
+        $preferredLevels.contains($campaign.getLevel()) ||
+        $preferredStyles.contains($campaign.getGameplayStyle()) ||
+        $preferredThemes.contains($campaign.getTheme())
+    ) {
+        modify($user){recommendNew($campaign)}
+    }
 end

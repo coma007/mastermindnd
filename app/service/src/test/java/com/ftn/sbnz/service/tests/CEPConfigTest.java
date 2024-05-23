@@ -133,13 +133,13 @@ public class CEPConfigTest {
         SessionClock clock = ksession.getSessionClock();
 
         User u = new User("nemanja");
+        Campaign c1 = new Campaign("Nova kampanja 1", Theme.FANTASY, GameplayStyle.COMBAT_FOCUSED, Long.parseLong("70"), 4, Level.EASY, "Ovo je moja nova prekul kampanja");
+        ksession.insert(c1);
         ksession.insert(u);
         ksession.insert(u.getWishlist());
         ksession.insert(u.getPreference());
         ksession.insert(u.getHistory());
-        Campaign c1 = new Campaign("Nova kampanja 1", Theme.FANTASY, GameplayStyle.COMBAT_FOCUSED, Long.parseLong("70"), 4, Level.EASY, "Ovo je moja nova prekul kampanja");
-        ksession.insert(c1);
-        AddCampaignEvent e1 = new AddCampaignEvent(Long.parseLong("1"), c1, u, AddCampaignType.PLAY, new Date(clock.getCurrentTime()));
+        AddCampaignEvent e1 = new AddCampaignEvent(Long.parseLong("1"), c1, u, AddCampaignType.LIKE, new Date(clock.getCurrentTime()));
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -150,7 +150,7 @@ public class CEPConfigTest {
         ksession.insert(c4);
 
         ksession.fireAllRules();
-
+        
          assert u.getRecommendedCampaigns().size() == 2;
     }
 }
