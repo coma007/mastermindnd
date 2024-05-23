@@ -28,10 +28,6 @@ public class UserActivityService {
         User user = repository.findById(userId).orElse(null);
         if (user == null) return;
 
-        if (user.getSavedCampaigns().contains(campaign)) return;
-
-        user.getSavedCampaigns().add(campaign);
-
         KieServices ks = KieServices.Factory.get();
         KieContainer kContainer = ks.getKieClasspathContainer();
         KieSession ksession = kContainer.newKieSession("userActivity");
@@ -44,6 +40,10 @@ public class UserActivityService {
         List<Campaign> campaigns = campaignService.findAll();
 
         ksession.insert(user);
+        ksession.insert(user.getCurrentPreferences());
+        ksession.insert(user.getHistory());
+        ksession.insert(user.getPreference());
+        ksession.insert(user.getWishlist());
         ksession.insert(e);
         for (Campaign c : campaigns) {
             ksession.insert(c);
@@ -59,22 +59,22 @@ public class UserActivityService {
         User user = repository.findById(userId).orElse(null);
         if (user == null) return;
 
-        if (user.getLikedCampaigns().contains(campaign)) return;
-
-        user.getLikedCampaigns().add(campaign);
-
         KieServices ks = KieServices.Factory.get();
         KieContainer kContainer = ks.getKieClasspathContainer();
         KieSession ksession = kContainer.newKieSession("userActivity");
 
         AddCampaignEvent e = new AddCampaignEvent();
         e.setCampaign(campaign);
+        e.setUser(user);
+        e.setType(AddCampaignType.LIKE);
 
         List<Campaign> campaigns = campaignService.findAll();
 
-        e.setUser(user);
-        e.setType(AddCampaignType.LIKE);
         ksession.insert(user);
+        ksession.insert(user.getCurrentPreferences());
+        ksession.insert(user.getHistory());
+        ksession.insert(user.getPreference());
+        ksession.insert(user.getWishlist());
         ksession.insert(e);
         for (Campaign c : campaigns) {
             ksession.insert(c);
@@ -90,10 +90,6 @@ public class UserActivityService {
         User user = repository.findById(userId).orElse(null);
         if (user == null) return;
 
-        if (user.getHistoryCampaigns().contains(campaign)) return;
-
-        user.getHistoryCampaigns().add(campaign);
-
         KieServices ks = KieServices.Factory.get();
         KieContainer kContainer = ks.getKieClasspathContainer();
         KieSession ksession = kContainer.newKieSession("userActivity");
@@ -106,6 +102,10 @@ public class UserActivityService {
         List<Campaign> campaigns = campaignService.findAll();
 
         ksession.insert(user);
+        ksession.insert(user.getCurrentPreferences());
+        ksession.insert(user.getHistory());
+        ksession.insert(user.getPreference());
+        ksession.insert(user.getWishlist());
         ksession.insert(e);
         for (Campaign c : campaigns) {
             ksession.insert(c);

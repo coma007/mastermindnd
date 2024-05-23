@@ -17,6 +17,12 @@ public class User {
     @Column
     private String name;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserActivity wishlist;
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserActivity preference;
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserActivity history;
     @ManyToMany
     private List<Campaign> savedCampaigns;
     @ElementCollection
@@ -45,9 +51,9 @@ public class User {
     private List<Rating> ratings;
     @ManyToMany
     private List<Campaign> recommendedCampaigns;
-    private boolean recommendNewFromHistory;
-    private boolean recommendNewFromPreference;
-    private boolean recommendNewFromWishlist;
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserPreferences currentPreferences;
+
 
     public void recommendNew(Campaign c) {
         this.recommendedCampaigns.add(c);
@@ -105,12 +111,45 @@ public class User {
         this.stylePreference = new ArrayList<>();
         this.styleWishlist = new ArrayList<>();
         this.ratings = new ArrayList<>();
-        this.recommendNewFromHistory = false;
-        this.recommendNewFromWishlist = false;
-        this.recommendNewFromPreference = false;
+        this.currentPreferences = new UserPreferences();
+        this.history = new UserActivity();
+        this.preference = new UserActivity();
+        this.wishlist = new UserActivity();
     }
 
     public User() {
+    }
+
+    public UserPreferences getCurrentPreferences() {
+        return currentPreferences;
+    }
+
+    public void setCurrentPreferences(UserPreferences preferences) {
+        this.currentPreferences = preferences;
+    }
+
+    public UserActivity getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(UserActivity wishlist) {
+        this.wishlist = wishlist;
+    }
+
+    public UserActivity getPreference() {
+        return preference;
+    }
+
+    public void setPreference(UserActivity preference) {
+        this.preference = preference;
+    }
+
+    public UserActivity getHistory() {
+        return history;
+    }
+
+    public void setHistory(UserActivity history) {
+        this.history = history;
     }
 
     public List<Campaign> getSavedCampaigns() {
@@ -239,29 +278,5 @@ public class User {
 
     public void setRecommendedCampaigns(List<Campaign> recommendedCampaigns) {
         this.recommendedCampaigns = recommendedCampaigns;
-    }
-
-    public boolean isRecommendNewFromHistory() {
-        return recommendNewFromHistory;
-    }
-
-    public void setRecommendNewFromHistory(boolean recommendNew) {
-        this.recommendNewFromHistory = recommendNew;
-    }
-
-    public boolean isRecommendNewFromPreference() {
-        return recommendNewFromPreference;
-    }
-
-    public void setRecommendNewFromPreference(boolean recommendNewFromPreference) {
-        this.recommendNewFromPreference = recommendNewFromPreference;
-    }
-
-    public boolean isRecommendNewFromWishlist() {
-        return recommendNewFromWishlist;
-    }
-
-    public void setRecommendNewFromWishlist(boolean recommendNewFromWishlist) {
-        this.recommendNewFromWishlist = recommendNewFromWishlist;
     }
 }

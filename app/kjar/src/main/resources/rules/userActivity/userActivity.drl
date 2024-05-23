@@ -6,6 +6,7 @@ import java.util.List
 import java.util.Map
 import com.ftn.sbnz.model.models.enums.Level;
 import com.ftn.sbnz.model.models.User;
+import com.ftn.sbnz.model.models.UserActivity;
 import com.ftn.sbnz.model.models.Campaign;
 
 import static java.util.stream.Collectors.*
@@ -14,169 +15,153 @@ import com.ftn.sbnz.model.models.enums.GameplayStyle
 import com.ftn.sbnz.model.models.enums.Theme;
 
 rule "save campaign"
+salience 10
 no-loop when
     AddCampaignEvent(
     $user: user,
     $campaign: campaign,
     type == AddCampaignType.SAVE
     )
+    $wishlist: UserActivity() from $user.getWishlist()
 then
-    modify($user) {
-        addLevelToWishlist($campaign.getLevel())
-    };
-    modify($user) {
-        addThemeToWishlist($campaign.getTheme())
-    };
-    modify($user) {
-        addStyleToWishlist($campaign.getGameplayStyle())
+    modify($wishlist) {
+        addCampaign($campaign)
     };
 end
 
 rule "like campaign"
+salience 5
 no-loop when
     AddCampaignEvent(
     $user: user,
     $campaign: campaign,
     type == AddCampaignType.LIKE
     )
+    $preference: UserActivity() from $user.getPreference()
 then
-    modify($user) {
-        addLevelToPreference($campaign.getLevel())
-    };
-    modify($user) {
-        addThemeToPreference($campaign.getTheme())
-    };
-    modify($user) {
-        addStyleToPreference($campaign.getGameplayStyle())
+    modify($preference) {
+        addCampaign($campaign)
     };
 end
 
 rule "play campaign"
+salience 5
 no-loop when
     AddCampaignEvent(
     $user: user,
     $campaign: campaign,
     type == AddCampaignType.PLAY
     )
+    $history: UserActivity() from $user.getHistory()
 then
-    modify($user) {
-        addLevelToHistory($campaign.getLevel())
-    };
-    modify($user) {
-        addThemeToHistory($campaign.getTheme())
-    };
-    modify($user) {
-        addStyleToHistory($campaign.getGameplayStyle())
+    modify($history) {
+        addCampaign($campaign)
     };
 end
 
 rule 'is ready for recommendation from history'
-no-loop when
-    $user:User(
-    $historyThemes:themeHistory,
-    $historyLevel:levelHistory,
-    $historyStyle:styleHistory,
-    $recommendedCampaigns:recommendedCampaigns
+salience 3
+when
+    AddCampaignEvent(
+    $user: user,
+    type == AddCampaignType.PLAY
     )
-    Number(intValue % 2 == 0, intValue != 0) from $historyThemes.size()
+    $history: UserActivity(
+    $playedCampaigns: getCampaigns(),
+    $level: getBestLevel(),
+    $style: getBestStyle(),
+    $theme: getBestTheme()
+    ) from $user.getHistory()
+    Number(intValue % 2 == 0, intValue != 0) from $playedCampaigns.size()
     $campaigns : List() from collect(Campaign())
 then
-    Object style = $historyStyle.get($historyStyle.size()-1);
-    Object level = $historyLevel.get($historyLevel.size()-1);
-    Object theme = $historyThemes.get($historyThemes.size()-1);
     Campaign cam = null;
     for (Object o : $campaigns) {
         Campaign c = (Campaign) o;
-        if (c.getGameplayStyle() == (GameplayStyle)style
-        && c.getLevel() == (Level) level
-        && c.getTheme() == (Theme)theme)
+        if (c.getGameplayStyle() == $style
+        && c.getLevel() == $level
+        && c.getTheme() == $theme)
             {
                 cam = c;
                 break;
             }
     }
     modify($user){recommendNew(cam)}
-    modify($user) {
-        addLevelToHistory(level)
-    };
-    modify($user) {
-        addThemeToHistory(theme)
-    };
-    modify($user) {
-        addStyleToHistory(style)
-    };
 end
 
 rule 'is ready for recommendation from wishlist'
+salience 3
 no-loop when
-    $user:User(
-    $wishlistThemes:themeWishlist,
-    $wishlistLevel:levelWishlist,
-    $wishlistStyle:styleWishlist,
-    $recommendation:recommendedCampaigns
+    AddCampaignEvent(
+    $user: user,
+    $campaign: campaign,
+    type == AddCampaignType.SAVE
     )
-    Number(intValue % 2 == 0, intValue != 0) from $wishlistThemes.size()
+    $wishlist: UserActivity(
+        $savedCampaigns: getCampaigns(),
+        $level: getBestLevel(),
+        $style: getBestStyle(),
+        $theme: getBestTheme()
+    ) from $user.getWishlist()
+    Number(intValue % 2 == 0, intValue != 0) from $savedCampaigns.size()
     $campaigns : List() from collect(Campaign())
 then
-        Object style = $wishlistStyle.get($wishlistStyle.size()-1);
-        Object level = $wishlistLevel.get($wishlistLevel.size()-1);
-        Object theme = $wishlistThemes.get($wishlistThemes.size()-1);
-        Campaign cam = null;
-        for (Object o : $campaigns) {
-            Campaign c = (Campaign) o;
-            if (c.getGameplayStyle() == (GameplayStyle)style
-            && c.getLevel() == (Level) level
-            && c.getTheme() == (Theme)theme)
-                {
-                    cam = c;
-                    break;
-                }
-        }
-        modify($user){recommendNew(cam)}
-        modify($user) {
-            addLevelToWishlist(level)
-        };
-        modify($user) {
-            addThemeToWishlist(theme)
-        };
-        modify($user) {
-            addStyleToWishlist(style)
-        };
+    Campaign cam = null;
+    for (Object o : $campaigns) {
+        Campaign c = (Campaign) o;
+        if (c.getGameplayStyle() == $style
+        && c.getLevel() == $level
+        && c.getTheme() == $theme)
+            {
+                cam = c;
+                break;
+            }
+    }
+    modify($user){recommendNew(cam)}
 end
 
 rule 'is ready for recommendation from preference'
+salience 3
 no-loop when
-    $user:User(
-    $preferenceThemes:themePreference,
-    $preferenceLevel:levelPreference,
-    $preferenceStyle:stylePreference,
-    $recommendation:recommendedCampaigns
+    AddCampaignEvent(
+    $user: user,
+    $campaign: campaign,
+    type == AddCampaignType.LIKE
     )
-    Number(intValue % 2 == 0, intValue != 0) from $preferenceThemes.size()
+    $preference: UserActivity(
+        $likedCampaigns: getCampaigns(),
+        $level: getBestLevel(),
+        $style: getBestStyle(),
+        $theme: getBestTheme()
+    ) from $user.getPreference()
+    Number(intValue % 2 == 0, intValue != 0) from $likedCampaigns.size()
     $campaigns : List() from collect(Campaign())
 then
-        GameplayStyle style = (GameplayStyle) $preferenceStyle.get($preferenceStyle.size()-1);
-        Level level = (Level) $preferenceLevel.get($preferenceLevel.size()-1);
-        Theme theme = (Theme) $preferenceThemes.get($preferenceThemes.size()-1);
-        Campaign cam = null;
-        for (Object o : $campaigns) {
-            Campaign c = (Campaign) o;
-            if (c.getGameplayStyle() == style
-            && c.getLevel() == level
-            && c.getTheme() == theme)
-                {
-                    cam = c;
-                    break;
-                }
-        }
-        modify($user){recommendNew(cam)};
-        modify($user) {
-            addLevelToPreference(level)
-        };
-        modify($user) {
-            addThemeToPreference(theme)
-        };
-        modify($user) {
-            addStyleToPreference(style)
-        };
+    Campaign cam = null;
+    for (Object o : $campaigns) {
+        Campaign c = (Campaign) o;
+        if (c.getGameplayStyle() == $style
+        && c.getLevel() == $level
+        && c.getTheme() == $theme)
+            {
+                cam = c;
+                break;
+            }
+    }
+    modify($user){recommendNew(cam)}
+end
+
+rule 'playing a lot in the last month, here is some more'
+when
+    $user : User()
+    $theme : Theme()
+    Number(intValue > 1) from accumulate(
+    $event: AddCampaignEvent(
+    $user == user,
+    $theme == campaign.getTheme(),
+    type == AddCampaignType.SAVE),
+    count($event)
+    )
+then
+    System.out.println("Enough events");
 end
