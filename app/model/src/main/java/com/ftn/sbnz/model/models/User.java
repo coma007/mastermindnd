@@ -24,11 +24,7 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     private UserActivity history;
     @ManyToMany
-    private List<Rating> ratings;
-    @ManyToMany
     private List<Campaign> recommendedCampaigns;
-    @OneToOne(cascade = CascadeType.ALL)
-    private UserPreferences currentPreferences;
 
 
     public void recommendNew(Campaign c) {
@@ -37,22 +33,12 @@ public class User {
     public User(String name) {
         this.name = name;
         this.recommendedCampaigns = new ArrayList<>();
-        this.ratings = new ArrayList<>();
-        this.currentPreferences = new UserPreferences();
         this.history = new UserActivity();
         this.preference = new UserActivity();
         this.wishlist = new UserActivity();
     }
 
     public User() {
-    }
-
-    public UserPreferences getCurrentPreferences() {
-        return currentPreferences;
-    }
-
-    public void setCurrentPreferences(UserPreferences preferences) {
-        this.currentPreferences = preferences;
     }
 
     public UserActivity getWishlist() {
@@ -93,14 +79,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
     }
 
     public List<Campaign> getRecommendedCampaigns() {

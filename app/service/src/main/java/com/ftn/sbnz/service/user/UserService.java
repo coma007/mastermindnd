@@ -26,7 +26,6 @@ public class UserService {
         User u = new User(name);
         KieSession session = userActivityServiceSession.getUserActivitySession();
         session.insert(u);
-        session.insert(u.getCurrentPreferences());
         session.insert(u.getHistory());
         session.insert(u.getPreference());
         session.insert(u.getWishlist());

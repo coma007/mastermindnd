@@ -250,3 +250,19 @@ then
     modify($user){recommendNew(cam)}
     modify($history){setRecommendedThisMonth(true)};
 end
+
+rule 'new campaign with the same spirit'
+no-loop
+when
+    $campaign: Campaign()
+    $user: User()
+    $preference: UserActivity() from $user.getPreference()
+    $preferredLevels: List() from $preference.getLevels()
+    $preferredStyles: List() from $preference.getStyles()
+    $preferredThemes: List() from $preference.getThemes()
+    eval($preferredLevels.contains($campaign.getLevel()) ||
+         $preferredStyles.contains($campaign.getGameplayStyle()) ||
+         $preferredThemes.contains($campaign.getTheme()))
+then
+    modify($user){recommendNew($campaign)}
+end

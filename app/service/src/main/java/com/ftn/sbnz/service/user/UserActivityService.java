@@ -40,7 +40,6 @@ public class UserActivityService {
         List<Campaign> campaigns = campaignService.findAll();
 
         userActivityServiceSession.getUserActivitySession().insert(user);
-        userActivityServiceSession.getUserActivitySession().insert(user.getCurrentPreferences());
         userActivityServiceSession.getUserActivitySession().insert(user.getHistory());
         userActivityServiceSession.getUserActivitySession().insert(user.getPreference());
         userActivityServiceSession.getUserActivitySession().insert(user.getWishlist());
@@ -67,7 +66,6 @@ public class UserActivityService {
         List<Campaign> campaigns = campaignService.findAll();
 
         userActivityServiceSession.getUserActivitySession().insert(user);
-        userActivityServiceSession.getUserActivitySession().insert(user.getCurrentPreferences());
         userActivityServiceSession.getUserActivitySession().insert(user.getHistory());
         userActivityServiceSession.getUserActivitySession().insert(user.getPreference());
         userActivityServiceSession.getUserActivitySession().insert(user.getWishlist());
@@ -95,7 +93,6 @@ public class UserActivityService {
 
         KieSession session = userActivityServiceSession.getUserActivitySession();
         session.insert(user);
-        session.insert(user.getCurrentPreferences());
         session.insert(user.getHistory());
         session.insert(user.getPreference());
         session.insert(user.getWishlist());
