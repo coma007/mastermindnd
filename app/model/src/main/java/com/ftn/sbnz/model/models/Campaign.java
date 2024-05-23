@@ -2,10 +2,7 @@ package com.ftn.sbnz.model.models;
 
 import com.ftn.sbnz.model.models.enums.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Campaign {
@@ -18,6 +15,7 @@ public class Campaign {
     private Long estimatedDuration;
     private Integer partySize;
     private Level level;
+    @Column(length = 1024)
     private String summary;
 
     public Campaign(String name, Theme theme, GameplayStyle gameplayStyle, Long estimatedDuration, Integer partySize, Level level, String summary) {
