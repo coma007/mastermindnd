@@ -252,6 +252,7 @@ then
 end
 
 rule 'new campaign with the same spirit'
+no-loop
 when
     $campaign: Campaign()
     $user: User()
