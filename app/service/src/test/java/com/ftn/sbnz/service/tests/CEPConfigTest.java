@@ -135,6 +135,7 @@ public class CEPConfigTest {
         User u = new User("nemanja");
         Campaign c1 = new Campaign("Nova kampanja 1", Theme.FANTASY, GameplayStyle.COMBAT_FOCUSED, Long.parseLong("70"), 4, Level.EASY, "Ovo je moja nova prekul kampanja");
         ksession.insert(c1);
+        u.getPreference().addCampaign(c1);
         ksession.insert(u);
         ksession.insert(u.getWishlist());
         ksession.insert(u.getPreference());
@@ -150,7 +151,7 @@ public class CEPConfigTest {
         ksession.insert(c4);
 
         ksession.fireAllRules();
-        
+
          assert u.getRecommendedCampaigns().size() == 2;
     }
 }

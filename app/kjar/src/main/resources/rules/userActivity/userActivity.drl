@@ -252,7 +252,6 @@ then
 end
 
 rule 'new campaign with the same spirit'
-no-loop
 when
     $campaign: Campaign()
     $user: User()
@@ -261,12 +260,11 @@ when
     $preferredStyles: getStyles(),
     $preferredThemes: getThemes()
     ) from $user.getPreference()
-then
-    if(
+    eval(
         $preferredLevels.contains($campaign.getLevel()) ||
         $preferredStyles.contains($campaign.getGameplayStyle()) ||
         $preferredThemes.contains($campaign.getTheme())
-    ) {
-        modify($user){recommendNew($campaign)}
-    }
+    )
+then
+    modify($user){recommendNew($campaign)}
 end
