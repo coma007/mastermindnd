@@ -1,24 +1,36 @@
-package com.ftn.sbnz.model.models;
+package com.ftn.sbnz.model.dtos;
 
-import com.ftn.sbnz.model.models.enums.*;
+import com.ftn.sbnz.model.models.Campaign;
+import com.ftn.sbnz.model.models.enums.GameplayStyle;
+import com.ftn.sbnz.model.models.enums.Level;
+import com.ftn.sbnz.model.models.enums.Theme;
 
-import javax.persistence.*;
-
-@Entity
-public class Campaign {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class CampaignDTO {
     private String name;
     private Theme theme;
     private GameplayStyle gameplayStyle;
     private Long estimatedDuration;
     private Integer partySize;
     private Level level;
-    @Column(length = 1024)
     private String summary;
 
-    public Campaign(String name, Theme theme, GameplayStyle gameplayStyle, Long estimatedDuration, Integer partySize, Level level, String summary) {
+    public Campaign toModel() {
+        Campaign c = new Campaign();
+        c.setName(this.name);
+        c.setEstimatedDuration(this.estimatedDuration);
+        c.setLevel(this.level);
+        c.setSummary(this.summary);
+        c.setTheme(this.theme);
+        c.setGameplayStyle(this.gameplayStyle);
+        c.setPartySize(this.partySize);
+        return c;
+    }
+
+    public CampaignDTO() {
+    }
+
+    public CampaignDTO(String name, Theme theme, GameplayStyle gameplayStyle, Long estimatedDuration,
+                       Integer partySize, Level level, String summary) {
         this.name = name;
         this.theme = theme;
         this.gameplayStyle = gameplayStyle;
@@ -28,16 +40,14 @@ public class Campaign {
         this.summary = summary;
     }
 
-    public Campaign() {
-
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
+    public CampaignDTO(Campaign c) {
+        this.name = c.getName();
+        this.theme = c.getTheme();
+        this.gameplayStyle = c.getGameplayStyle();
+        this.estimatedDuration = c.getEstimatedDuration();
+        this.partySize = c.getPartySize();
+        this.level = c.getLevel();
+        this.summary = c.getSummary();
     }
 
     public String getName() {
