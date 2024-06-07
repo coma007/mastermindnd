@@ -1,0 +1,71 @@
+.search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #F5F5DC;
+    /* Beige */
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.search-form h1 {
+    font-family: "Cinzel", serif;
+    /* DnD style font */
+    color: #8B0000;
+    /* Dark Red */
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.search-form h1 span {
+    color: #000000;
+    /* Black */
+}
+
+.search-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgba(255, 248, 220, 0.9);
+    /* Cornsilk with transparency */
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    width: 30%;
+}
+
+.search-form .form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.search-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.search-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #8B0000;
+    /* Dark Red */
+    border-radius: 4px;
+}
+
+.search-form .button {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    font-family: "Cinzel", serif;
+    /* DnD style font */
+    font-weight: bold;
+    font-size: large;
+}

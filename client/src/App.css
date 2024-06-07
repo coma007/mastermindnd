@@ -1,0 +1,43 @@
+body {
+  font-family: 'Cinzel', serif;
+  background-color: #F5F5DC;
+  /* Beige */
+  color: #000000;
+  /* Black */
+}
+
+a {
+  color: #8B0000;
+  /* Dark Red */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.card {
+  background-color: #FFF8DC;
+  /* Cornsilk */
+  border: 1px solid #8B0000;
+  /* Dark Red */
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px;
+}
+
+.button {
+  background-color: #8B0000;
+  /* Dark Red */
+  color: #F5F5DC;
+  /* Beige */
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.button:hover {
+  background-color: #A52A2A;
+  /* Lightened Dark Red */
+}

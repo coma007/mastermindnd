@@ -1,0 +1,42 @@
+.recommended-campaigns {
+    padding: 20px;
+    background-color: #F5F5DC;
+    min-height: 90vh;
+    /* Beige */
+}
+
+h1 {
+    color: #8B0000;
+    /* Dark Red */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.campaigns-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    justify-items: center;
+}
+
+.card {
+    background-color: #FFF8DC;
+    /* Cornsilk */
+    border: 1px solid #8B0000;
+    /* Dark Red */
+    border-radius: 8px;
+    padding: 16px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    color: #8B0000;
+    /* Dark Red */
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 4px 0;
+}

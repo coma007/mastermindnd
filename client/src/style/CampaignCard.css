@@ -1,0 +1,51 @@
+/* CampaignCard.css */
+.card {
+    background-color: #FFF8DC;
+    /* Cornsilk */
+    border: 1px solid #8B0000;
+    /* Dark Red */
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-family: 'Cinzel', serif;
+    color: #8B0000;
+    /* Dark Red */
+    margin-bottom: 10px;
+}
+
+.campaign-info {
+    font-family: 'Cinzel', serif;
+    color: #8B0000;
+    /* Dark Red */
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.campaign-description {
+    color: gray;
+    font-size: small;
+    font-family: 'Merriweather', serif;
+}
+
+.campaign-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.campaign-detail {
+    display: flex;
+    align-items: center;
+    font-family: 'Cinzel', serif;
+    color: #000000;
+    /* Black */
+}
+
+.campaign-detail svg {
+    margin-right: 5px;
+}

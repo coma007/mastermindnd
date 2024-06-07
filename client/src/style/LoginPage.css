@@ -1,0 +1,99 @@
+.login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #F5F5DC;
+    /* Beige */
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.login-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../public/logo.png');
+    background-size: 80%;
+    /* Make the image smaller */
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.5;
+    /* 50% opacity */
+    z-index: -1;
+}
+
+h1 {
+    font-family: 'Cinzel', serif;
+    color: #8B0000;
+    /* Dark Red */
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+h1 span {
+    color: black;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgba(255, 248, 220, 0.9);
+    /* Cornsilk with transparency */
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    width: 30%;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 96%;
+    padding: 10px;
+    border: 1px solid #8B0000;
+    /* Dark Red */
+    border-radius: 4px;
+}
+
+.button {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    font-size: large;
+    background-color: #8B0000;
+    color: #F5F5DC;
+    padding: 10px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(245, 245, 220, 0.7);
+    /* Beige with transparency */
+    z-index: 1;
+}

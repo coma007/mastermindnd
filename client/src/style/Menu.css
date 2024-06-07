@@ -1,0 +1,41 @@
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #FFF8DC;
+    /* Beige */
+    color: #8B0000;
+    border-bottom: 1px solid #8B0000;
+    /* Dark Red */
+}
+
+.logo {
+    height: 50px;
+}
+
+.menu-options {
+    display: flex;
+}
+
+.menu-option {
+    margin-right: 20px;
+    color: #8B0000;
+    /* Dark Red */
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.menu-option:hover {
+    transform: scale(1.2);
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #8B0000;
+    /* Dark Red */
+    font-family: "Cinzel", serif;
+    /* DnD style font */
+}
