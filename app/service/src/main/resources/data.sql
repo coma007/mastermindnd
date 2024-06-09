@@ -85,17 +85,9 @@ VALUES (25,  'Elara', 'High Elf', 1, 4, 0, 8, 12, 25, 2);
 
 -----------
 
-INSERT INTO users (name, recommend_new_from_history, recommend_new_from_preference, recommend_new_from_wishlist)
-VALUES ('Neca Pereca', false, false, false);
+INSERT INTO users (username, password)
+VALUES ('necapereca', 'topola123');
 
-INSERT INTO users (name, recommend_new_from_history, recommend_new_from_preference, recommend_new_from_wishlist)
-VALUES ('Rudy Star', false, false, false);
-
------------
-
-INSERT INTO ratings (campaign_id, timestamp, rating)
-VALUES (1, '2024-06-01 10:00:00', 4);
-
-INSERT INTO ratings (campaign_id, timestamp, rating)
-VALUES (2, '2024-06-02 11:00:00', 5);
+INSERT INTO users (username, password)
+VALUES ('rudystar', 'lovcenac123');
 

@@ -27,7 +27,8 @@ public class CEPConfigTest {
         KieSession ksession = kContainer.newKieSession("userActivity");
         SessionClock clock = ksession.getSessionClock();
 
-        User u = new User("nemanja");
+
+        User u = new User("nemanja", "123");
         ksession.insert(u);
         ksession.insert(u.getWishlist());
         ksession.insert(u.getPreference());
@@ -63,7 +64,7 @@ public class CEPConfigTest {
         KieSession ksession = kContainer.newKieSession("userActivity");
         SessionClock clock = ksession.getSessionClock();
 
-        User u = new User("nemanja");
+        User u = new User("nemanja", "123");
         ksession.insert(u);
         ksession.insert(u.getWishlist());
         ksession.insert(u.getPreference());
@@ -98,7 +99,7 @@ public class CEPConfigTest {
         KieSession ksession = kContainer.newKieSession("userActivity");
         SessionClock clock = ksession.getSessionClock();
 
-        User u = new User("nemanja");
+        User u = new User("nemanja", "123");
         ksession.insert(u);
         ksession.insert(u.getWishlist());
         ksession.insert(u.getPreference());
@@ -132,7 +133,7 @@ public class CEPConfigTest {
         KieSession ksession = kContainer.newKieSession("userActivity");
         SessionClock clock = ksession.getSessionClock();
 
-        User u = new User("nemanja");
+        User u = new User("nemanja", "123");
         Campaign c1 = new Campaign("Nova kampanja 1", Theme.FANTASY, GameplayStyle.COMBAT_FOCUSED, Long.parseLong("70"), 4, Level.EASY, "Ovo je moja nova prekul kampanja");
         ksession.insert(c1);
         u.getPreference().addCampaign(c1);
@@ -153,5 +154,6 @@ public class CEPConfigTest {
         ksession.fireAllRules();
 
          assert u.getRecommendedCampaigns().size() == 2;
+
     }
 }

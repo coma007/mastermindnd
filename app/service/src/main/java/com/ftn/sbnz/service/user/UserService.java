@@ -17,13 +17,23 @@ public class UserService {
     @Autowired
     private KSessionService userActivityServiceSession;
 
+
+    public User login(String username, String password) {
+        User user = repository.findByUsername(username);
+        if (user == null || !user.getPassword().equals(password)) {
+            return null;
+        }
+        return user;
+    }
+
     public User findById(Long id) {
         Optional<User> user = repository.findById(id);
         return user.orElse(null);
     }
 
-    public User createUser(String name) {
-        User u = new User(name);
+    public User createUser(String username, String password) {
+        User u = new User(username, password);
+
         KieSession session = userActivityServiceSession.getUserActivitySession();
         session.insert(u);
         session.insert(u.getHistory());
@@ -31,7 +41,9 @@ public class UserService {
         session.insert(u.getWishlist());
 
         session.fireAllRules();
+
         repository.save(u);
         return u;
     }
+
 }

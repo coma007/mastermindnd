@@ -1,9 +1,5 @@
 package com.ftn.sbnz.model.models;
 
-import com.ftn.sbnz.model.models.enums.GameplayStyle;
-import com.ftn.sbnz.model.models.enums.Level;
-import com.ftn.sbnz.model.models.enums.Theme;
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -15,7 +11,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    private String name;
+    private String username;
+    @Column
+    private String password;
 
     @OneToOne(cascade = CascadeType.ALL)
     private UserActivity wishlist;
@@ -30,8 +28,9 @@ public class User {
     public void recommendNew(Campaign c) {
         this.recommendedCampaigns.add(c);
     }
-    public User(String name) {
-        this.name = name;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
         this.recommendedCampaigns = new ArrayList<>();
         this.history = new UserActivity();
         this.preference = new UserActivity();
@@ -73,12 +72,20 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Campaign> getRecommendedCampaigns() {
