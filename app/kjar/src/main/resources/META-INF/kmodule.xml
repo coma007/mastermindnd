@@ -2,4 +2,7 @@
     <kbase name="activityBase" packages="userActivity">
         <ksession name="userActivity"/>
     </kbase>
+    <kbase name="themeFinderBase" packages="themeFinder">
+        <ksession name="themeFinder"/>
+    </kbase>
 </kmodule>

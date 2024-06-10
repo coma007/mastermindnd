@@ -8,6 +8,7 @@ import com.ftn.sbnz.model.models.enums.Level;
 import com.ftn.sbnz.model.models.User;
 import com.ftn.sbnz.model.models.UserActivity;
 import com.ftn.sbnz.model.models.Campaign;
+import com.ftn.sbnz.model.models.CampaignTheme;
 
 import static java.util.stream.Collectors.*
 import java.util.HashMap

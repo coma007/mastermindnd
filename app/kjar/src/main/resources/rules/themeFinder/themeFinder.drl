@@ -1,0 +1,26 @@
+package rules.themeFinder;
+
+import com.ftn.sbnz.model.models.CampaignTheme;
+import com.ftn.sbnz.model.models.enums.Theme;
+import com.ftn.sbnz.model.events.ThemeQuery;
+
+global java.util.List results;
+
+rule "Find all for theme"
+when
+    ThemeQuery(
+    $theme: baseTheme
+    )
+    $campaignTheme: CampaignTheme(
+    $name: themeName
+    )
+    IsTheme($name, $theme; )
+then
+    results.add($name);
+end
+
+query IsTheme(String name, Theme theme)
+    CampaignTheme(name, theme.toString(); )
+    or
+    (CampaignTheme(name, parentTheme; ) and IsTheme(parentTheme, theme; ))
+end

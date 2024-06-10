@@ -1,8 +1,10 @@
 package com.ftn.sbnz.service.tests;
 
 import com.ftn.sbnz.model.events.AddCampaignEvent;
+import com.ftn.sbnz.model.events.ThemeQuery;
 import com.ftn.sbnz.model.events.enums.AddCampaignType;
 import com.ftn.sbnz.model.models.Campaign;
+import com.ftn.sbnz.model.models.CampaignTheme;
 import com.ftn.sbnz.model.models.User;
 import com.ftn.sbnz.model.models.enums.GameplayStyle;
 import com.ftn.sbnz.model.models.enums.Level;
@@ -14,7 +16,9 @@ import org.kie.api.runtime.KieSession;
 import org.kie.api.time.SessionClock;
 import org.kie.api.time.SessionPseudoClock;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -155,5 +159,32 @@ public class CEPConfigTest {
 
          assert u.getRecommendedCampaigns().size() == 2;
 
+    }
+
+    @Test
+    public void testThemes() {
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kContainer = ks.getKieClasspathContainer();
+        KieSession ksession = kContainer.newKieSession("themeFinder");
+        SessionClock clock = ksession.getSessionClock();
+
+        User u = new User("nemanja", "123");
+        ksession.insert(u);
+        ksession.insert(u.getWishlist());
+        ksession.insert(u.getPreference());
+        ksession.insert(u.getHistory());
+        CampaignTheme ct0 = new CampaignTheme("Voldemort attacks", "HP");
+        CampaignTheme ct1 = new CampaignTheme("HP", "Film");
+        CampaignTheme ct2 = new CampaignTheme("Film", Theme.FANTASY.toString());
+        ksession.insert(ct0);
+        ksession.insert(ct1);
+        ksession.insert(ct2);
+        ThemeQuery e1 = new ThemeQuery(Long.parseLong("1"), "Voldemort attacks", Theme.FANTASY, new Date(clock.getCurrentTime()));
+        ksession.insert(e1);
+        List<String> results = new ArrayList<>();
+        ksession.setGlobal("results", results);
+
+        ksession.fireAllRules();
+        System.out.println(results.size());
     }
 }
