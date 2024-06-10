@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -35,6 +36,7 @@ public class UserActivityService {
         AddCampaignEvent e = new AddCampaignEvent();
         e.setCampaign(campaign);
         e.setUser(user);
+        e.setTimestamp(new Date());
         e.setType(AddCampaignType.SAVE);
 
         List<Campaign> campaigns = campaignService.findAll();
@@ -61,6 +63,7 @@ public class UserActivityService {
         AddCampaignEvent e = new AddCampaignEvent();
         e.setCampaign(campaign);
         e.setUser(user);
+        e.setTimestamp(new Date());
         e.setType(AddCampaignType.LIKE);
 
         List<Campaign> campaigns = campaignService.findAll();
@@ -87,6 +90,7 @@ public class UserActivityService {
         AddCampaignEvent e = new AddCampaignEvent();
         e.setCampaign(campaign);
         e.setUser(user);
+        e.setTimestamp(new Date());
         e.setType(AddCampaignType.PLAY);
 
         List<Campaign> campaigns = campaignService.findAll();
