@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/LoginPage.css';
+import axios from 'axios';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = (e: any) => {
+    const handleLogin = async (e: any) => {
         e.preventDefault();
         console.log('Username:', username);
         console.log('Password:', password);
+
+        try {
+            const response = await axios.post('http://localhost:8000/api/users/login', {
+                username,
+                password,
+            });
+
+            console.log(response.data); // Handle the response data as needed
+        } catch (error) {
+            console.error('There was an error logging in!', error);
+        }
+
         navigate('/campaigns');
     };
 
