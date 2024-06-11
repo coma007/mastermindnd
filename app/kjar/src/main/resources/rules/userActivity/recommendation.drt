@@ -1,0 +1,41 @@
+template header
+    name
+    type
+    activity
+
+package userActivity;
+
+template "recommendation"
+
+rule 'is ready for recommendation from ${name}'
+salience 3
+no-loop when
+    AddCampaignEvent(
+    $user: user,
+    $campaign: campaign,
+    type == ${type}
+    )
+    $wishlist: UserActivity(
+        $savedCampaigns: getCampaigns(),
+        $level: getBestLevel(),
+        $style: getBestStyle(),
+        $theme: getBestTheme()
+    ) from ${activity}
+    Number(intValue % 2 == 0, intValue != 0) from $savedCampaigns.size()
+    $campaigns : List() from collect(Campaign())
+then
+    Campaign cam = null;
+    for (Object o : $campaigns) {
+        Campaign c = (Campaign) o;
+        if (c.getGameplayStyle() == $style
+        && c.getLevel() == $level
+        && c.getTheme() == $theme)
+            {
+                cam = c;
+                break;
+            }
+    }
+    if (cam != null) modify($user){recommendNew(cam)}
+end
+
+end template

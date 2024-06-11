@@ -1,7 +1,6 @@
 package com.ftn.sbnz.service.user;
 
 import com.ftn.sbnz.model.models.User;
-import com.ftn.sbnz.service.kie_session.KSessionService;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,7 @@ public class UserService {
     private IUserRepository repository;
 
     @Autowired
-    private KSessionService userActivityServiceSession;
+    private KieSession kieSession;
 
 
     public User login(String username, String password) {
@@ -34,7 +33,7 @@ public class UserService {
     public User createUser(String username, String password) {
         User u = new User(username, password);
 
-        KieSession session = userActivityServiceSession.getUserActivitySession();
+        KieSession session = kieSession;
         session.insert(u);
         session.insert(u.getHistory());
         session.insert(u.getPreference());

@@ -1,0 +1,40 @@
+template header
+    name
+    type
+    activity
+
+package userActivity;
+
+template "user-activity"
+
+import com.ftn.sbnz.model.events.enums.AddCampaignType
+import com.ftn.sbnz.model.events.AddCampaignEvent
+import java.util.List
+import java.util.Map
+import com.ftn.sbnz.model.models.enums.Level;
+import com.ftn.sbnz.model.models.User;
+import com.ftn.sbnz.model.models.UserActivity;
+import com.ftn.sbnz.model.models.Campaign;
+import com.ftn.sbnz.model.models.CampaignTheme;
+
+import static java.util.stream.Collectors.*
+import java.util.HashMap
+import com.ftn.sbnz.model.models.enums.GameplayStyle
+import com.ftn.sbnz.model.models.enums.Theme;
+
+rule "${name} campaign"
+salience 10
+no-loop when
+    AddCampaignEvent(
+    $user: user,
+    $campaign: campaign,
+    type == ${type}
+    )
+    $wishlist: UserActivity() from ${activity}
+then
+    modify($wishlist) {
+        addCampaign($campaign)
+    };
+end
+
+end template
