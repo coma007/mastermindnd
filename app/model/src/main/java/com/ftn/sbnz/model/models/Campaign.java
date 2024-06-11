@@ -17,6 +17,9 @@ public class Campaign {
     private Level level;
     @Column(length = 1024)
     private String summary;
+    @OneToOne
+    @JoinColumn(name = "campaign_theme_id")
+    private CampaignTheme campaignTheme;
 
     public Campaign(String name, Theme theme, GameplayStyle gameplayStyle, Long estimatedDuration, Integer partySize, Level level, String summary) {
         this.name = name;
@@ -30,6 +33,14 @@ public class Campaign {
 
     public Campaign() {
 
+    }
+
+    public CampaignTheme getCampaignTheme() {
+        return campaignTheme;
+    }
+
+    public void setCampaignTheme(CampaignTheme campaignTheme) {
+        this.campaignTheme = campaignTheme;
     }
 
     public void setId(Long id) {

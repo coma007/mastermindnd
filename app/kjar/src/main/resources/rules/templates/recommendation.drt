@@ -3,7 +3,7 @@ template header
     type
     activity
 
-package userActivity;
+package templates;
 
 template "recommendation"
 

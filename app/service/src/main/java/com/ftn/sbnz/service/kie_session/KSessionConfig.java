@@ -29,16 +29,16 @@ public class KSessionConfig {
 //        sessionBuilder.addRules("./kjar/src/main/resources/rules/cep/cep_global_recommendation.drl");
 //        sessionBuilder.addRules("./kjar/src/main/resources/rules/backward/backward.drl");
 //        sessionBuilder.addRules("./kjar/src/main/resources/rules/query/query.drl");
-        sessionBuilder.addTemplate("./kjar/src/main/resources/rules/userActivity/activity.drt", "./kjar/src/main/resources/rules/userActivity/activity.xlsx");
-        sessionBuilder.addTemplate("./kjar/src/main/resources/rules/userActivity/recommendation.drt", "./kjar/src/main/resources/rules/userActivity/recommendation.xlsx");
+        sessionBuilder.addTemplate("./kjar/src/main/resources/rules/templates/activity.drt", "./kjar/src/main/resources/rules/templates/activity.xlsx");
+        sessionBuilder.addTemplate("./kjar/src/main/resources/rules/templates/recommendation.drt", "./kjar/src/main/resources/rules/templates/recommendation.xlsx");
 //
         return sessionBuilder.build();
 
 //        return kieContainer.newKieSession("userActivity");
     }
     @Bean
-    public KieSession kieSessionCep() {
+    public KieSession kieSessionTheme() {
 
-        return kieContainer.newKieSession("cepKsession");
+        return kieContainer.newKieSession("themeFinder");
     }
 }
