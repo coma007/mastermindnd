@@ -1,4 +1,4 @@
-.search-form {
+.search-page {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,9 +9,10 @@
     position: relative;
     z-index: 1;
     overflow: hidden;
+    font-family: 'Cinzel', serif;
 }
 
-.search-form h1 {
+.search-page h1 {
     font-family: "Cinzel", serif;
     /* DnD style font */
     color: #8B0000;
@@ -22,45 +23,68 @@
     text-align: center;
 }
 
-.search-form h1 span {
+.search-page h1 span {
     color: #000000;
     /* Black */
 }
 
-.search-form form {
+.search-page form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     background-color: rgba(255, 248, 220, 0.9);
     /* Cornsilk with transparency */
-    padding: 50px;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 2;
-    width: 30%;
+    width: 80%;
 }
 
-.search-form .form-group {
+.search-page .form-group {
     margin-bottom: 15px;
     width: 100%;
 }
 
-.search-form label {
-    display: block;
+.search-page label {
+    display: flex;
+    align-items: center;
     margin-bottom: 5px;
+    font-weight: 100;
+}
+
+
+.main-label {
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
-.search-form select {
+.search-page .checkbox-group,
+.search-page .radio-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 10%);
     width: 100%;
-    padding: 10px;
-    border: 1px solid #8B0000;
-    /* Dark Red */
-    border-radius: 4px;
 }
 
-.search-form .button {
+
+.form-row .radio-group,
+.form-row .checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17%, 1fr));
+    gap: 10px;
+    width: 100%;
+}
+
+
+.search-page .checkbox-group input,
+.search-page .radio-group input {
+    /* margin-right: 5px; */
+    transform: scale(1);
+    /* Increased size of checkboxes and radio buttons */
+}
+
+.search-page .button {
     margin-top: 20px;
     width: 100%;
     text-align: center;
@@ -68,4 +92,33 @@
     /* DnD style font */
     font-weight: bold;
     font-size: large;
+    background-color: #8B0000;
+    /* Dark Red */
+    color: #FFF8DC;
+    /* Cornsilk */
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-page .button:hover {
+    background-color: #FFD700;
+    /* Gold */
+    color: #FFF8DC;
+    /* Cornsilk */
+}
+
+.search-page .form-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.search-page .form-row .form-group {
+    width: 48%;
+}
+
+input[type="number"] {
+    width: 20%;
 }

@@ -11,6 +11,10 @@ const Menu = () => {
         return null;
     }
 
+    const handleLogout = (e: any) => {
+        localStorage.removeItem('id');
+    };
+
     return (
         <div className="menu">
             <Link to="/campaigns?type=recommended" className="logo-link">
@@ -19,12 +23,12 @@ const Menu = () => {
             <div className="menu-options">
                 <Link to="/campaigns?type=recommended" className="menu-option"><FaHome /></Link>
                 <Link to="/search" className="menu-option"><FaSearch /></Link>
-                <Link to="/campaigns?type=favorites" className="menu-option"><FaHeart /></Link>
+                <Link to="/campaigns?type=preference" className="menu-option"><FaHeart /></Link>
                 <Link to="/campaigns?type=history" className="menu-option"><FaHistory /></Link>
                 <Link to="/campaigns?type=wishlist" className="menu-option"><FaList /></Link>
             </div>
             <div className='menu-options'>
-                <Link to="/login" className="menu-option"><FaSignOutAlt /></Link>
+                <Link to="/login" className="menu-option" onClick={handleLogout}><FaSignOutAlt /></Link>
             </div>
         </div>
     );

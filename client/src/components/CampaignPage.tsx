@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import CampaignCard from './CampaignCard';
 import '../style/CampaignPage.css'
+import { ApiService } from '../api/ApiService';
 
 
 const campaigns = [
@@ -74,6 +75,17 @@ const campaigns = [
 const CampaignsPage = () => {
     const location = useLocation();
     const type = new URLSearchParams(location.search).get('type');
+    const [campaigns, setCampaigns] = useState([]);
+
+    useEffect(() => {
+        const fetchCampaigns = async () => {
+            const campaignsData = await ApiService.getCampaigns(type!);
+            setCampaigns(campaignsData);
+        };
+
+        fetchCampaigns();
+    }, [type]);
+
     return (
         <div className="recommended-campaigns">
             <h1>Recommended Campaigns</h1>

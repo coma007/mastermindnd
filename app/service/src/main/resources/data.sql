@@ -58,6 +58,86 @@ VALUES ('The Dark Forest: Curse of the Werewolf', 1, 3, 60, 4, 1, 'Enter the Dar
 INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
 VALUES ('The Celestial War: Rise of the Archangels', 0, 1, 120, 5, 2, 'Join the celestial war in this epic campaign of divine conflict. Your party of five advanced adventurers will take on the role of archangels, battling demons, fallen angels, and other celestial beings in a struggle for the fate of the heavens. Uncover the secrets of the celestial realms, forge alliances with divine beings, and lead your armies to victory. With an estimated duration of 120 hours, this campaign offers epic battles, divine quests, and the chance to become a legend in the celestial war.');
 
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Vampire Lords: Blood and Shadows', 1, 3, 70, 5, 2, 'In "The Vampire Lords: Blood and Shadows," your party of five advanced adventurers must navigate a land ruled by vampire lords. Uncover their dark secrets, infiltrate their strongholds, and rally the oppressed to overthrow their reign. This 70-hour campaign blends horror and intrigue, perfect for those who love dark fantasy and complex narratives.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Starship Odyssey: Journey Beyond the Stars', 4, 1, 120, 6, 2, 'Embark on an interstellar adventure in "The Starship Odyssey: Journey Beyond the Stars." As a crew of six advanced adventurers, explore unknown galaxies, encounter alien species, and uncover cosmic mysteries. With 120 hours of gameplay, this sci-fi epic offers a mix of exploration, diplomacy, and space battles.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Haunted Mansion: Echoes of the Past', 1, 3, 50, 4, 1, 'In "The Haunted Mansion: Echoes of the Past," your party of four adventurers investigates a mansion filled with restless spirits and dark secrets. Unravel the mystery behind the hauntings and lay the spirits to rest. This 50-hour campaign offers a thrilling blend of horror, puzzle-solving, and storytelling.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Lost City of Atlantis', 0, 1, 100, 5, 1, 'Dive into "The Lost City of Atlantis," a campaign for five adventurers. Explore underwater ruins, battle sea monsters, and uncover the secrets of the legendary city. With an estimated duration of 100 hours, this campaign offers a rich blend of exploration, combat, and discovery.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Demons Lair: Wrath of the Infernal', 0, 0, 60, 4, 1, 'Descend into "The Demons Lair: Wrath of the Infernal," a campaign for four adventurers. Battle demonic hordes, navigate hellish landscapes, and confront a powerful demon lord. This 60-hour campaign is perfect for players seeking intense combat and dark fantasy themes.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Frozen Tundra: Quest for the Ice Crown', 0, 1, 80, 6, 2, 'Venture into "The Frozen Tundra: Quest for the Ice Crown," a campaign for six advanced adventurers. Brave the harsh cold, battle frost giants, and seek the legendary Ice Crown. This 80-hour campaign offers epic quests, challenging battles, and survival in a frozen wasteland.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Mystic Isles: Secrets of the Arcane', 3, 1, 70, 5, 1, 'Explore "The Mystic Isles: Secrets of the Arcane," a campaign for five adventurers. Discover ancient magic, navigate enchanted islands, and face arcane guardians. With 70 hours of gameplay, this campaign offers a blend of magic, exploration, and mystery.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Desert Sands: Legacy of the Pharaohs', 0, 1, 90, 4, 1, 'Embark on a journey through "The Desert Sands: Legacy of the Pharaohs," a campaign for four adventurers. Explore ancient tombs, battle desert creatures, and uncover the secrets of the Pharaohs. This 90-hour campaign offers rich storytelling, exploration, and puzzle-solving.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Necromancers Curse: A Dark Awakening', 0, 0, 60, 4, 2, 'Face "The Necromancers Curse: A Dark Awakening," a campaign for four advanced adventurers. Battle undead hordes, uncover dark rituals, and stop a necromancers plan to raise an army of the dead. This 60-hour campaign offers intense combat and dark fantasy themes.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Sky Realm: Aerial Adventures', 2, 1, 100, 5, 1, 'Soar into "The Sky Realm: Aerial Adventures," a campaign for five adventurers. Explore floating islands, battle sky pirates, and uncover the secrets of the sky realm. This 100-hour campaign offers epic quests, exploration, and aerial combat.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Enchanted Kingdom: A Tale of Magic', 0, 1, 120, 6, 2, 'Journey through "The Enchanted Kingdom: A Tale of Magic," a campaign for six advanced adventurers. Explore a magical kingdom, uncover ancient spells, and battle powerful sorcerers. With 120 hours of gameplay, this campaign offers rich storytelling, magic, and adventure.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Goblin War: Clash of Clans', 0, 0, 70, 5, 1, 'Join "The Goblin War: Clash of Clans," a campaign for five adventurers. Lead your clan against rival goblin factions, battle through treacherous terrain, and secure your place as the dominant clan. This 70-hour campaign offers strategic combat and clan warfare.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Elemental Chaos: War of the Elements', 0, 1, 90, 6, 2, 'Enter "The Elemental Chaos: War of the Elements," a campaign for six advanced adventurers. Battle elemental forces, navigate chaotic realms, and restore balance to the elements. This 90-hour campaign offers epic quests, elemental magic, and intense combat.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Lost Tribe: Secrets of the Jungle', 0, 1, 60, 4, 1, 'Uncover "The Lost Tribe: Secrets of the Jungle," a campaign for four adventurers. Explore dense jungles, battle wild creatures, and uncover the secrets of a lost tribe. This 60-hour campaign offers exploration, puzzle-solving, and jungle adventures.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Forbidden City: Legacy of the Emperors', 0, 1, 80, 5, 1, 'Discover "The Forbidden City: Legacy of the Emperors," a campaign for five adventurers. Explore ancient ruins, battle imperial guardians, and uncover the legacy of forgotten emperors. This 80-hour campaign offers rich storytelling, exploration, and combat.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Undersea Realm: Quest for the Trident', 0, 1, 100, 4, 1, 'Dive into "The Undersea Realm: Quest for the Trident," a campaign for four adventurers. Explore underwater cities, battle sea monsters, and seek the legendary Trident. This 100-hour campaign offers underwater exploration, combat, and discovery.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The War of the Ancients: Titans Reborn', 0, 0, 120, 6, 2, 'Enter "The War of the Ancients: Titans Reborn," a campaign for six advanced adventurers. Battle ancient titans, navigate treacherous landscapes, and uncover the secrets of the ancients. This 120-hour campaign offers epic battles, rich storytelling, and strategic combat.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Time Travelers: Guardians of History', 2, 1, 90, 5, 1, 'Join "The Time Travelers: Guardians of History," a campaign for five adventurers. Travel through time, battle historical foes, and protect the timeline from disruption. This 90-hour campaign offers time travel, exploration, and combat.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Shadow Realm: A Journey into Darkness', 1, 3, 60, 4, 1, 'Venture into "The Shadow Realm: A Journey into Darkness," a campaign for four adventurers. Battle shadow creatures, navigate dark landscapes, and uncover the secrets of the Shadow Realm. This 60-hour campaign offers horror, exploration, and combat.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Siege of the Undercity: Battle for Survival', 0, 0, 70, 5, 2, 'Defend "The Siege of the Undercity: Battle for Survival," a campaign for five advanced adventurers. Battle invading forces, navigate the Undercity\''s treacherous tunnels, and protect its inhabitants. This 70-hour campaign offers intense combat, strategy, and survival.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Lunar Expedition: Secrets of the Moon', 4, 1, 80, 4, 1, 'Explore "The Lunar Expedition: Secrets of the Moon," a campaign for four adventurers. Discover ancient ruins, battle alien creatures, and uncover the moon\''s secrets. This 80-hour campaign offers space exploration, combat, and discovery.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Crystal Kingdom: Shards of Power', 0, 1, 100, 5, 1, 'Discover "The Crystal Kingdom: Shards of Power," a campaign for five adventurers. Explore a kingdom of crystals, battle elemental creatures, and uncover the power of the crystal shards. This 100-hour campaign offers exploration, magic, and combat.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Infernal Fortress: A Hellish Crusade', 0, 0, 60, 4, 1, 'Storm "The Infernal Fortress: A Hellish Crusade," a campaign for four adventurers. Battle through hellish landscapes, defeat infernal foes, and bring down the fortress. This 60-hour campaign offers intense combat, dark themes, and epic battles.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Mystic Grove: Secrets of the Druids', 0, 3, 70, 5, 1, 'Explore "The Mystic Grove: Secrets of the Druids," a campaign for five adventurers. Discover ancient druidic rituals, navigate enchanted forests, and uncover the groves secrets. This 70-hour campaign offers magic, exploration, and storytelling.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Forbidden Forest: A Tale of Beasts', 0, 0, 90, 6, 2, 'Enter "The Forbidden Forest: A Tale of Beasts," a campaign for six advanced adventurers. Battle mythical beasts, uncover ancient secrets, and survive the forests perils. This 90-hour campaign offers intense combat, exploration, and discovery.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Enchanted Caverns: A Search for Treasure', 0, 1, 60, 4, 1, 'Delve into "The Enchanted Caverns: A Search for Treasure," a campaign for four adventurers. Navigate treacherous caves, battle cave-dwelling creatures, and uncover hidden treasures. This 60-hour campaign offers exploration, puzzle-solving, and combat.');
+
+INSERT INTO campaign (name, theme, gameplay_style, estimated_duration, party_size, level, summary)
+VALUES ('The Stormlands: Battle for the Skies', 2, 0, 80, 5, 1, 'Enter "The Stormlands: Battle for the Skies," a campaign for five adventurers. Battle through stormy landscapes, defeat aerial foes, and uncover the secrets of the Stormlands. This 80-hour campaign offers intense combat, exploration, and discovery.');
 
 -----------
 

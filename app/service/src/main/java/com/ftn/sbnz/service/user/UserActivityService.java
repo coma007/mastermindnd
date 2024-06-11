@@ -6,13 +6,11 @@ import com.ftn.sbnz.model.models.Campaign;
 import com.ftn.sbnz.model.models.User;
 import com.ftn.sbnz.service.campaign.CampaignService;
 import com.ftn.sbnz.service.kie_session.KSessionService;
-import org.kie.api.KieServices;
-import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -107,5 +105,21 @@ public class UserActivityService {
         session.fireAllRules();
 
         repository.save(user);
+    }
+
+    public List<Campaign> getCampaigns(String type, Long userId) {
+        User user = repository.findById(userId).orElse(null);
+        switch (type) {
+            case "recommended":
+                return user.getRecommendedCampaigns();
+            case "preference":
+                return user.getPreference().getCampaigns();
+            case "history":
+                return user.getHistory().getCampaigns();
+            case "wishlist":
+                return user.getWishlist().getCampaigns();
+            default:
+                return new ArrayList<>();
+        }
     }
 }

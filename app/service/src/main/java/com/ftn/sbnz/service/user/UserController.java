@@ -1,11 +1,14 @@
 package com.ftn.sbnz.service.user;
 
+import com.ftn.sbnz.model.models.Campaign;
 import com.ftn.sbnz.model.models.Credentials;
 import com.ftn.sbnz.model.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -58,5 +61,11 @@ public class UserController {
     public ResponseEntity<String> playCampaign(@RequestParam Long campaignId, @RequestParam Long userId) {
         userActivityService.playCampaign(campaignId, userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/campaigns")
+    public ResponseEntity<List<Campaign>> getCampaigns(@RequestParam String type, @RequestParam Long userId) {
+        List<Campaign> campaigns = userActivityService.getCampaigns(type, userId);
+        return new ResponseEntity<>(campaigns, HttpStatus.OK);
     }
 }
