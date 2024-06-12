@@ -15,6 +15,9 @@ public class User {
     @Column
     private String password;
 
+    @Transient
+    private boolean isSearching;
+
     @OneToOne(cascade = CascadeType.ALL)
     private UserActivity wishlist;
     @OneToOne(cascade = CascadeType.ALL)
@@ -94,5 +97,13 @@ public class User {
 
     public void setRecommendedCampaigns(List<Campaign> recommendedCampaigns) {
         this.recommendedCampaigns = recommendedCampaigns;
+    }
+
+    public boolean getIsSearching() {
+        return isSearching;
+    }
+
+    public void setIsSearching(boolean isSearching) {
+        this.isSearching = isSearching;
     }
 }

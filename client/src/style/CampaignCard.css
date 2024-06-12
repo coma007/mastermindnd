@@ -1,5 +1,7 @@
 /* CampaignCard.css */
 .card {
+    position: relative;
+
     background-color: #FFF8DC;
     /* Cornsilk */
     border: 1px solid #8B0000;
@@ -8,6 +10,7 @@
     padding: 16px;
     margin: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding-bottom: 60px !important;
 }
 
 .card :hover {
@@ -37,9 +40,19 @@ h2 {
 }
 
 .campaign-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    padding: 10px;
+    background-color: rgba(255, 248, 220, 0.9);
+    /* Cornsilk with transparency */
+    border-top: 1px solid #8B0000;
+    /* Dark Red */
+    border-radius: 0 0 8px 8px;
+    width: 95%;
 }
 
 .campaign-detail {
@@ -52,4 +65,25 @@ h2 {
 
 .campaign-detail svg {
     margin-right: 5px;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 7px;
+    margin-left: -30px;
+    /* Adjust as needed */
+}
+
+.icon-container>* {
+    transform: scale(1.2);
+    margin: 0 10px;
+    /* Adjust spacing between icons as needed */
+    cursor: pointer;
+}
+
+.icon-container>*:hover {
+    transform: scale(1.5);
+    color: #8B0000;
+    /* Dark Red - Change color on hover if desired */
 }

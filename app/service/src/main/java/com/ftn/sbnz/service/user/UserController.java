@@ -2,6 +2,7 @@ package com.ftn.sbnz.service.user;
 
 import com.ftn.sbnz.model.models.Campaign;
 import com.ftn.sbnz.model.models.Credentials;
+import com.ftn.sbnz.model.models.SearchData;
 import com.ftn.sbnz.model.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,6 +67,12 @@ public class UserController {
     @GetMapping("/campaigns")
     public ResponseEntity<List<Campaign>> getCampaigns(@RequestParam String type, @RequestParam Long userId) {
         List<Campaign> campaigns = userActivityService.getCampaigns(type, userId);
+        return new ResponseEntity<>(campaigns, HttpStatus.OK);
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<List<Campaign>> searchCampaigns(@RequestBody SearchData data, @RequestParam Long userId) {
+        List<Campaign> campaigns = userActivityService.searchCampaigns(data, userId);
         return new ResponseEntity<>(campaigns, HttpStatus.OK);
     }
 }

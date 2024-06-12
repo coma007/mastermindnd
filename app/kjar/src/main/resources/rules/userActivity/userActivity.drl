@@ -8,12 +8,77 @@ import com.ftn.sbnz.model.models.enums.Level;
 import com.ftn.sbnz.model.models.User;
 import com.ftn.sbnz.model.models.UserActivity;
 import com.ftn.sbnz.model.models.Campaign;
+import com.ftn.sbnz.model.models.SearchData;
 import com.ftn.sbnz.model.models.CampaignTheme;
+import com.ftn.sbnz.model.events.SearchEvent;
 
 import static java.util.stream.Collectors.*
 import java.util.HashMap
 import com.ftn.sbnz.model.models.enums.GameplayStyle
-import com.ftn.sbnz.model.models.enums.Theme;
+import com.ftn.sbnz.model.models.enums.Theme
+import com.ftn.sbnz.model.models.CampaignMatch
+import java.util.Collections
+import java.util.Comparator
+import java.util.ArrayList;
+
+global List<CampaignMatch> searchResults;
+
+rule "Match campaigns with search data"
+when
+    $event : SearchEvent(
+        $searchData : getSearchData()
+    )
+    $campaigns : List() from collect(Campaign())
+then
+    for (Object o : $campaigns) {
+        int matchCount = 0;
+        Campaign c = (Campaign) o;
+        if (!$searchData.getTheme().isEmpty() && $searchData.getTheme().contains(c.getTheme().name())) {
+            matchCount++;
+        }
+        if (!$searchData.getLevel().isEmpty() && $searchData.getLevel().contains(c.getLevel().name())) {
+            matchCount++;
+        }
+        if (!$searchData.getGameplayStyle().isEmpty() && $searchData.getGameplayStyle().contains(c.getGameplayStyle().name())) {
+            matchCount++;
+        }
+        if (!$searchData.getPartySize().isEmpty()) {
+            int searchPartySize = Integer.parseInt($searchData.getPartySize().get(0));
+            if (Math.abs(searchPartySize - c.getPartySize()) < 2) {
+                matchCount++;
+            }
+        }
+        CampaignMatch campaignMatch = new CampaignMatch(c, matchCount);
+        insert(campaignMatch);
+    }
+end
+
+rule "Get top 5 campaigns"
+salience -1
+when
+    $campaignMatches : List() from collect (CampaignMatch())
+then
+    Collections.sort($campaignMatches, new Comparator<CampaignMatch>() {
+        public int compare(CampaignMatch cm1, CampaignMatch cm2) {
+            return cm2.getMatchCount() - cm1.getMatchCount();
+        }
+    });
+
+    int j = 0;
+    List<Campaign> top12 = new ArrayList<>();
+    for (Object o : $campaignMatches) {
+        CampaignMatch cm = (CampaignMatch) o;
+        top12.add(cm.getCampaign());
+        j++;
+        if (j >= 12) {
+            break;
+        }
+    }
+
+    searchResults.clear();
+    searchResults.addAll(top12);
+end
+
 
 rule 'playing a lot of the same difficulty in the last month, here is some more'
 no-loop when

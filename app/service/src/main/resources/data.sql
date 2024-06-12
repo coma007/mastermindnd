@@ -387,10 +387,27 @@ INSERT INTO dndcharacter (hit_points, name, race, character_class, level, xp, hi
 VALUES (25,  'Elara', 'High Elf', 1, 4, 0, 8, 12, 25, 2);
 
 -----------
+INSERT INTO user_activity (id, best_level, best_theme, best_style, recommended_this_month)
+VALUES (1, NULL, NULL, NULL, false);
 
-INSERT INTO users (username, password)
-VALUES ('necapereca', 'topola123');
+INSERT INTO user_activity (id, best_level, best_theme, best_style, recommended_this_month)
+VALUES (2, NULL, NULL, NULL, false);
 
-INSERT INTO users (username, password)
-VALUES ('rudystar', 'lovcenac123');
+INSERT INTO user_activity (id, best_level, best_theme, best_style, recommended_this_month)
+VALUES (3, NULL, NULL, NULL, false);
+
+INSERT INTO user_activity (id, best_level, best_theme, best_style, recommended_this_month)
+VALUES (4, NULL, NULL, NULL, false);
+
+INSERT INTO user_activity (id, best_level, best_theme, best_style, recommended_this_month)
+VALUES (5, NULL, NULL, NULL, false);
+
+INSERT INTO user_activity (id, best_level, best_theme, best_style, recommended_this_month)
+VALUES (6, NULL, NULL, NULL, false);
+
+INSERT INTO users (username, password, history_id, preference_id, wishlist_id)
+VALUES ('necapereca', 'topola123', 1, 2, 3);
+
+INSERT INTO users (username, password, history_id, preference_id, wishlist_id)
+VALUES ('rudystar', 'lovcenac123', 4, 5, 6);
 

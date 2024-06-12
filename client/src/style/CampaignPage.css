@@ -14,7 +14,7 @@ h1 {
 
 .campaigns-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     justify-items: center;
 }
@@ -26,8 +26,7 @@ h1 {
     /* Dark Red */
     border-radius: 8px;
     padding: 16px;
-    width: 100%;
-    max-width: 300px;
+    width: 90%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 

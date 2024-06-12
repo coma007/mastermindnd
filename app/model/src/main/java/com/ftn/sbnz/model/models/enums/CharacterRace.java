@@ -8,6 +8,6 @@ public enum CharacterRace {
     GNOME,
     HALF_ORC,
     DRAGONBORN,
-    THIEFLING
+    THIEFLING;
 
 }
