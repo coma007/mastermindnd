@@ -12,3 +12,7 @@ export interface SearchData {
     duration: string[];
     partySize: string[];
 }
+
+export interface SearchByTheme {
+    theme: string;
+}

@@ -1,5 +1,5 @@
-import { GET_CAMPAIGNS_URL, LOGIN_URL, SEARCH_CAMPAIGNS_URL } from ".";
-import { Credentials, SearchData } from "./ApiTypes";
+import { GET_CAMPAIGNS_URL, LOGIN_URL, SEARCH_CAMPAIGNS_BY_THEME_URL, SEARCH_CAMPAIGNS_URL } from ".";
+import { Credentials, SearchByTheme, SearchData } from "./ApiTypes";
 import axios from "axios";
 
 export const ApiService = {
@@ -32,6 +32,11 @@ export const ApiService = {
       },
       withCredentials: true
     });
+    return response.data;
+  },
+
+  searchCampaignsByTheme: async (search: SearchByTheme): Promise<any> => {
+    const response = await axios.get(SEARCH_CAMPAIGNS_BY_THEME_URL() + "?theme=" + search.theme);
     return response.data;
   },
 

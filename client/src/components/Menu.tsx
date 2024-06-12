@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaHeart, FaHistory, FaHome, FaList, FaSearch, FaSignOutAlt } from 'react-icons/fa';
+import { FaHeart, FaHistory, FaHome, FaList, FaSearch, FaSignOutAlt, FaFilter } from 'react-icons/fa';
 import '../style/Menu.css';
 
 const Menu = () => {
@@ -23,6 +23,7 @@ const Menu = () => {
             <div className="menu-options">
                 <Link to="/campaigns?type=recommended" className="menu-option"><FaHome /></Link>
                 <Link to="/search" className="menu-option"><FaSearch /></Link>
+                <Link to="/theme-search" className="menu-option"><FaFilter /></Link>
                 <Link to="/campaigns?type=preference" className="menu-option"><FaHeart /></Link>
                 <Link to="/campaigns?type=history" className="menu-option"><FaHistory /></Link>
                 <Link to="/campaigns?type=wishlist" className="menu-option"><FaList /></Link>
