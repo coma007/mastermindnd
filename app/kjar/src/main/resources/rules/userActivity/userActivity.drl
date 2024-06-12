@@ -130,6 +130,19 @@ when
         $preferredStyles.contains($campaign.getGameplayStyle()) ||
         $preferredThemes.contains($campaign.getTheme())
     )
+    $e: AddCampaignEvent(
+        $user == user,
+        type == AddCampaignType.LIKE
+        )
+        $style: GameplayStyle() from $campaign.getGameplayStyle()
+    Number(intValue > 1) from accumulate(
+        $event: AddCampaignEvent(
+        $user == user,
+        $style == campaign.getGameplayStyle(),
+        type == AddCampaignType.LIKE,
+        $e != this, this after[2s, 90d] $e),
+        count($event)
+    )
 then
     modify($user){recommendNew($campaign)}
 end

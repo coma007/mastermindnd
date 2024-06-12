@@ -139,8 +139,11 @@ public class CEPConfigTest {
 
         User u = new User("nemanja", "123");
         Campaign c1 = new Campaign("Nova kampanja 1", Theme.FANTASY, GameplayStyle.COMBAT_FOCUSED, Long.parseLong("70"), 4, Level.EASY, "Ovo je moja nova prekul kampanja");
-        ksession.insert(c1);
+        Campaign c2 = new Campaign("Nova kampanja 1", Theme.HISTORICAL, GameplayStyle.COMBAT_FOCUSED, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
+        Campaign c3 = new Campaign("Nova kampanja 1", Theme.WAR, GameplayStyle.COMBAT_FOCUSED, Long.parseLong("70"), 4, Level.MEDIUM, "Ovo je moja nova prekul kampanja");
         u.getPreference().addCampaign(c1);
+        u.getPreference().addCampaign(c2);
+        u.getPreference().addCampaign(c3);
         ksession.insert(u);
         ksession.insert(u.getWishlist());
         ksession.insert(u.getPreference());
@@ -150,14 +153,18 @@ public class CEPConfigTest {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
         }
+        AddCampaignEvent e2 = new AddCampaignEvent(Long.parseLong("1"), c2, u, AddCampaignType.LIKE, new Date(clock.getCurrentTime()));
+        AddCampaignEvent e3 = new AddCampaignEvent(Long.parseLong("1"), c3, u, AddCampaignType.LIKE, new Date(clock.getCurrentTime()));
         ksession.insert(e1);
+        ksession.insert(e2);
+        ksession.insert(e3);
 
         Campaign c4 = new Campaign("Nova kampanja 4", Theme.FANTASY, GameplayStyle.COMBAT_FOCUSED, Long.parseLong("70"), 10, Level.HARD, "Ovo je moja novija prekul kampanja");
         ksession.insert(c4);
 
         ksession.fireAllRules();
 
-         assert u.getRecommendedCampaigns().size() == 2;
+        assert u.getRecommendedCampaigns().size() == 1;
 
     }
 
@@ -185,6 +192,6 @@ public class CEPConfigTest {
         ksession.setGlobal("results", results);
 
         ksession.fireAllRules();
-        System.out.println(results.size());
+        assert results.size() == 3;
     }
 }
