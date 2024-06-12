@@ -1,11 +1,12 @@
 import React from 'react';
 import { FaClock, FaHeart, FaPlay, FaSave, FaUsers } from 'react-icons/fa';
 import '../style/CampaignCard.css';
+import { ApiService } from '../api/ApiService';
 
 const CampaignCard = (props: { campaign: any }) => {
 
-    const handleIconClick = (action: string) => {
-        console.log(`${action} clicked`);
+    const handleIconClick = async (action: string) => {
+        await ApiService.markCampaign(props.campaign.id, action);
     };
 
     return (

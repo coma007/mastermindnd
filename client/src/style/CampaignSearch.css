@@ -17,6 +17,7 @@
     /* DnD style font */
     color: #8B0000;
     /* Dark Red */
+    margin-top: -50px;
     margin-bottom: 30px;
     position: relative;
     z-index: 2;

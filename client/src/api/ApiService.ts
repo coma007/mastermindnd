@@ -1,4 +1,4 @@
-import { GET_CAMPAIGNS_URL, LOGIN_URL, SEARCH_CAMPAIGNS_BY_THEME_URL, SEARCH_CAMPAIGNS_URL } from ".";
+import { GET_CAMPAIGNS_URL, LOGIN_URL, MARK_CAMPAIGN_URL, SEARCH_CAMPAIGNS_BY_THEME_URL, SEARCH_CAMPAIGNS_URL } from ".";
 import { Credentials, SearchByTheme, SearchData } from "./ApiTypes";
 import axios from "axios";
 
@@ -15,7 +15,17 @@ export const ApiService = {
   },
 
 
-  getCampaigns: async (type: String): Promise<any> => {
+  markCampaign: async (campaignId: number, type: string): Promise<any> => {
+    const response = await axios.put(MARK_CAMPAIGN_URL(type) + "?campaignId=" + campaignId + "&userId=" + localStorage.getItem("id"), {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      withCredentials: true
+    });
+    return response.data;
+  },
+
+  getCampaigns: async (type: string): Promise<any> => {
     const response = await axios.get(GET_CAMPAIGNS_URL() + "?type=" + type + "&userId=" + localStorage.getItem("id"), {
       headers: {
         'Content-Type': 'application/json'
