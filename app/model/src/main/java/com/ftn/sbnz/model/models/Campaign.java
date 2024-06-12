@@ -17,7 +17,7 @@ public class Campaign {
     private Level level;
     @Column(length = 1024)
     private String summary;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "campaign_theme_id")
     private CampaignTheme campaignTheme;
 

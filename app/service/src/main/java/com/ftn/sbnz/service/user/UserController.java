@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @RestController
@@ -67,12 +69,14 @@ public class UserController {
     @GetMapping("/campaigns")
     public ResponseEntity<List<Campaign>> getCampaigns(@RequestParam String type, @RequestParam Long userId) {
         List<Campaign> campaigns = userActivityService.getCampaigns(type, userId);
+        campaigns = new ArrayList<>(new HashSet<>(campaigns));
         return new ResponseEntity<>(campaigns, HttpStatus.OK);
     }
 
     @PostMapping("/search")
     public ResponseEntity<List<Campaign>> searchCampaigns(@RequestBody SearchData data, @RequestParam Long userId) {
         List<Campaign> campaigns = userActivityService.searchCampaigns(data, userId);
+        campaigns = new ArrayList<>(new HashSet<>(campaigns));
         return new ResponseEntity<>(campaigns, HttpStatus.OK);
     }
 }

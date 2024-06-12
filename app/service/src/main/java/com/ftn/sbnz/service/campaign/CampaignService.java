@@ -4,7 +4,9 @@ import com.ftn.sbnz.model.dtos.CampaignDTO;
 import com.ftn.sbnz.model.events.ThemeQuery;
 import com.ftn.sbnz.model.models.Campaign;
 import com.ftn.sbnz.model.models.CampaignTheme;
+import com.ftn.sbnz.model.models.User;
 import com.ftn.sbnz.model.models.enums.Theme;
+import com.ftn.sbnz.service.user.IUserRepository;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class CampaignService {
 
     @Autowired
     private ICampaignRepository repository;
+    @Autowired
+    private IUserRepository userRepository;
     @Autowired
     private KieSession kieSession;
     @Autowired
@@ -42,7 +46,16 @@ public class CampaignService {
         Campaign c = newCampaign.toModel();
         c = repository.save(c);
         KieSession session = kieSession;
+        List<Campaign> searchResults = new ArrayList<>();
+        session.setGlobal("searchResults", searchResults);
+
         session.insert(c);
+        for (User u : userRepository.findAll()) {
+            session.insert(u);
+            session.insert(u.getHistory());
+            session.insert(u.getPreference());
+            session.insert(u.getWishlist());
+        }
         session.fireAllRules();
         return new CampaignDTO(c);
     }

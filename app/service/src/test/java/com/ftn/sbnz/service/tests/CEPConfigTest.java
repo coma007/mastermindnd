@@ -53,6 +53,8 @@ public class CEPConfigTest {
         ksession.insert(e2);
         ksession.insert(e3);
 
+        List<Campaign> searchResults = new ArrayList<>();
+        ksession.setGlobal("searchResults", searchResults);
 
         ksession.fireAllRules();
 
@@ -104,6 +106,9 @@ public class CEPConfigTest {
         KieServices ks = KieServices.Factory.get();
         KieContainer kContainer = ks.getKieClasspathContainer();
         KieSession ksession = kContainer.newKieSession("userActivity");
+        List<Campaign> searchResults = new ArrayList<>();
+        ksession.setGlobal("searchResults", searchResults);
+
         SessionClock clock = ksession.getSessionClock();
 
         User u = new User("nemanja", "123");
@@ -139,6 +144,9 @@ public class CEPConfigTest {
         KieServices ks = KieServices.Factory.get();
         KieContainer kContainer = ks.getKieClasspathContainer();
         KieSession ksession = kContainer.newKieSession("userActivity");
+        List<Campaign> searchResults = new ArrayList<>();
+        ksession.setGlobal("searchResults", searchResults);
+
         SessionClock clock = ksession.getSessionClock();
 
         User u = new User("nemanja", "123");
@@ -199,6 +207,9 @@ public class CEPConfigTest {
 
         Campaign c4 = new Campaign("Nova kampanja 4", Theme.FANTASY, GameplayStyle.COMBAT_FOCUSED, Long.parseLong("70"), 10, Level.HARD, "Ovo je moja novija prekul kampanja");
         ksession.insert(c4);
+
+        List<Campaign> searchResults = new ArrayList<>();
+        ksession.setGlobal("searchResults", searchResults);
 
         ksession.fireAllRules();
 

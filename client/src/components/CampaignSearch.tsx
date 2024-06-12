@@ -63,6 +63,7 @@ const CampaignSearch = () => {
         };
 
         let campaigns = await ApiService.searchCampaigns(payload)
+        console.log(campaigns);
         navigate('/campaigns?type=search', {
             state: { campaigns }
         });

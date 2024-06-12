@@ -20,7 +20,6 @@ public class CampaignController {
 
     @PostMapping("/create")
     public ResponseEntity<CampaignDTO> createCampaign(@RequestBody CampaignDTO newCampaign) {
-        Theme campaigns = service.findBaseTheme(service.findById(1L));
         CampaignDTO createdCampaign = service.create(newCampaign);
         return new ResponseEntity(createdCampaign, HttpStatus.OK);
     }

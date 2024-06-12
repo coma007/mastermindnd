@@ -1,10 +1,13 @@
 package com.ftn.sbnz.service.user;
 
+import com.ftn.sbnz.model.models.Campaign;
 import com.ftn.sbnz.model.models.User;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,6 +41,9 @@ public class UserService {
         session.insert(u.getHistory());
         session.insert(u.getPreference());
         session.insert(u.getWishlist());
+
+        List<Campaign> searchResults = new ArrayList<>();
+        session.setGlobal("searchResults", searchResults);
 
         session.fireAllRules();
 

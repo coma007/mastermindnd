@@ -27,7 +27,18 @@ const CampaignsPage = () => {
 
     return (
         <div className="recommended-campaigns">
-            <h1>Recommended Campaigns</h1>
+            {type == "recommended" ? 
+            (<h1>Recommended Campaigns</h1>) : null
+            }
+            {type == "preference" ? 
+            (<h1>Liked Campaigns</h1>) : null
+            }
+            {type == "history" ? 
+            (<h1>Played Campaigns</h1>) : null
+            }
+            {type == "wishlist" ? 
+            (<h1>Saved Campaigns</h1>) : null
+            }
             <div className="campaigns-grid">
                 {campaigns.map((campaign, index) => (
                     <CampaignCard key={index} campaign={campaign} />

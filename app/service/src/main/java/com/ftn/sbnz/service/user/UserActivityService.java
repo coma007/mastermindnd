@@ -13,6 +13,7 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +29,7 @@ public class UserActivityService {
     @Autowired
     private KieSession kieSession;
 
+    @Transactional
     public void saveCampaign(Long campaignId, Long userId) {
         Campaign campaign = campaignService.findById(campaignId);
         if (campaign == null) return;
@@ -42,6 +44,9 @@ public class UserActivityService {
 
         List<Campaign> campaigns = campaignService.findAll();
 
+        List<Campaign> searchResults = new ArrayList<>();
+        kieSession.setGlobal("searchResults", searchResults);
+
         kieSession.insert(user);
         kieSession.insert(user.getHistory());
         kieSession.insert(user.getPreference());
@@ -54,6 +59,7 @@ public class UserActivityService {
         repository.save(user);
     }
 
+    @Transactional
     public void likeCampaign(Long campaignId, Long userId) {
         Campaign campaign = campaignService.findById(campaignId);
         if (campaign == null) return;
@@ -68,6 +74,8 @@ public class UserActivityService {
         e.setType(AddCampaignType.LIKE);
 
         List<Campaign> campaigns = campaignService.findAll();
+        List<Campaign> searchResults = new ArrayList<>();
+        kieSession.setGlobal("searchResults", searchResults);
 
         kieSession.insert(user);
         kieSession.insert(user.getHistory());
@@ -82,6 +90,7 @@ public class UserActivityService {
         repository.save(user);
     }
 
+    @Transactional
     public void playCampaign(Long campaignId, Long userId) {
         Campaign campaign = campaignService.findById(campaignId);
         if (campaign == null) return;
@@ -97,6 +106,9 @@ public class UserActivityService {
         List<Campaign> campaigns = campaignService.findAll();
 
         KieSession session = kieSession;
+        List<Campaign> searchResults = new ArrayList<>();
+        session.setGlobal("searchResults", searchResults);
+
         session.insert(user);
         session.insert(user.getHistory());
         session.insert(user.getPreference());

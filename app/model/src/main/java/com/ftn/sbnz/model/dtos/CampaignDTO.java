@@ -8,6 +8,7 @@ import com.ftn.sbnz.model.models.enums.Theme;
 
 public class CampaignDTO {
     private String name;
+    private Long id;
     private String theme;
     private GameplayStyle gameplayStyle;
     private Long estimatedDuration;
@@ -50,6 +51,7 @@ public class CampaignDTO {
         this.partySize = c.getPartySize();
         this.level = c.getLevel();
         this.summary = c.getSummary();
+        this.id = c.getId();
     }
 
     public String getName() {
@@ -106,5 +108,13 @@ public class CampaignDTO {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

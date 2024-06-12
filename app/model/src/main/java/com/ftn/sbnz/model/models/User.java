@@ -29,6 +29,7 @@ public class User {
 
 
     public void recommendNew(Campaign c) {
+        if (this.recommendedCampaigns.contains(c)) return;
         this.recommendedCampaigns.add(c);
     }
     public User(String username, String password) {
