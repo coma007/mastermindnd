@@ -130,7 +130,7 @@ public class UserActivityService {
         User user = repository.findById(userId).orElse(null);
         if (user == null) return List.of();
 
-        KieSession session = userActivityServiceSession.getUserActivitySession();
+        KieSession session = kieSession;
         session.insert(data);
 
         List<Campaign> searchResults = new ArrayList<>();
