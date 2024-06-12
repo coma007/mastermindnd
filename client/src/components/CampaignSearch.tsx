@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../style/CampaignSearch.css'; // Assuming you have a CSS file for styling the form
 import { SearchData } from '../api/ApiTypes';
 import { ApiService } from '../api/ApiService';
@@ -6,6 +7,7 @@ import { ApiService } from '../api/ApiService';
 
 const CampaignSearch = () => {
 
+    const navigate = useNavigate();
     const [formData, setFormData] = useState<SearchData>({
         theme: [],
         level: [],
@@ -60,9 +62,10 @@ const CampaignSearch = () => {
             partySize: formData.partySize
         };
 
-        await ApiService.searchCampaigns(payload)
-
-        // Example: Send request using fetch API
+        let campaigns = await ApiService.searchCampaigns(payload)
+        navigate('/campaigns?type=search', {
+            state: { campaigns }
+        });
     };
 
     return (

@@ -14,13 +14,11 @@ import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.time.SessionClock;
-import org.kie.api.time.SessionPseudoClock;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class CEPConfigTest {
@@ -39,8 +37,8 @@ public class CEPConfigTest {
         ksession.insert(u.getPreference());
         ksession.insert(u.getHistory());
         Campaign c1 = new Campaign("Nova kampanja 1", Theme.FANTASY, GameplayStyle.COMBAT_FOCUSED, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
-        Campaign c2 = new Campaign("Nova kampanja 1", Theme.HISTORICAL, GameplayStyle.PUZZLE_SOLVING_AND_ENVIRONMENTAL_CHALLENGES, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
-        Campaign c3 = new Campaign("Nova kampanja 1", Theme.WAR, GameplayStyle.ROLE_PLAYING_AND_CHARACTER_DRIVEN, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
+        Campaign c2 = new Campaign("Nova kampanja 1", Theme.HISTORICAL, GameplayStyle.PUZZLE_SOLVING, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
+        Campaign c3 = new Campaign("Nova kampanja 1", Theme.WAR, GameplayStyle.ROLE_PLAYING, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
         ksession.insert(c1);
         ksession.insert(c2);
         ksession.insert(c3);
@@ -77,11 +75,11 @@ public class CEPConfigTest {
         searchData.setPartySize(Arrays.asList("2"));
 
         Campaign c1 = new Campaign("Nova kampanja 1", Theme.FANTASY, GameplayStyle.COMBAT_FOCUSED, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
-        Campaign c2 = new Campaign("Nova kampanja 1", Theme.HISTORICAL, GameplayStyle.PUZZLE_SOLVING_AND_ENVIRONMENTAL_CHALLENGES, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
-        Campaign c3 = new Campaign("Nova kampanja 1", Theme.WAR, GameplayStyle.ROLE_PLAYING_AND_CHARACTER_DRIVEN, Long.parseLong("70"), 4, Level.EASY, "Ovo je moja nova prekul kampanja");
-        Campaign c4 = new Campaign("Nova kampanja 1", Theme.MYSTERY, GameplayStyle.ROLE_PLAYING_AND_CHARACTER_DRIVEN, Long.parseLong("70"), 4, Level.MEDIUM, "Ovo je moja nova prekul kampanja");
-        Campaign c5 = new Campaign("Nova kampanja 1", Theme.POLITICAL_INTRIGUE, GameplayStyle.ROLE_PLAYING_AND_CHARACTER_DRIVEN, Long.parseLong("70"), 4, Level.MEDIUM, "Ovo je moja nova prekul kampanja");
-        Campaign c6 = new Campaign("Nova kampanja 1", Theme.URBAN, GameplayStyle.ROLE_PLAYING_AND_CHARACTER_DRIVEN, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
+        Campaign c2 = new Campaign("Nova kampanja 1", Theme.HISTORICAL, GameplayStyle.PUZZLE_SOLVING, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
+        Campaign c3 = new Campaign("Nova kampanja 1", Theme.WAR, GameplayStyle.ROLE_PLAYING, Long.parseLong("70"), 4, Level.EASY, "Ovo je moja nova prekul kampanja");
+        Campaign c4 = new Campaign("Nova kampanja 1", Theme.MYSTERY, GameplayStyle.ROLE_PLAYING, Long.parseLong("70"), 4, Level.MEDIUM, "Ovo je moja nova prekul kampanja");
+        Campaign c5 = new Campaign("Nova kampanja 1", Theme.POLITICAL_INTRIGUE, GameplayStyle.ROLE_PLAYING, Long.parseLong("70"), 4, Level.MEDIUM, "Ovo je moja nova prekul kampanja");
+        Campaign c6 = new Campaign("Nova kampanja 1", Theme.URBAN, GameplayStyle.ROLE_PLAYING, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
 
         List<CampaignMatch> searchResults = new ArrayList<>();
         ksession.setGlobal("searchResults", searchResults);
@@ -114,8 +112,8 @@ public class CEPConfigTest {
         ksession.insert(u.getPreference());
         ksession.insert(u.getHistory());
         Campaign c1 = new Campaign("Nova kampanja 1", Theme.FANTASY, GameplayStyle.COMBAT_FOCUSED, Long.parseLong("70"), 4, Level.EASY, "Ovo je moja nova prekul kampanja");
-        Campaign c2 = new Campaign("Nova kampanja 1", Theme.FANTASY, GameplayStyle.PUZZLE_SOLVING_AND_ENVIRONMENTAL_CHALLENGES, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
-        Campaign c3 = new Campaign("Nova kampanja 1", Theme.FANTASY, GameplayStyle.ROLE_PLAYING_AND_CHARACTER_DRIVEN, Long.parseLong("70"), 4, Level.MEDIUM, "Ovo je moja nova prekul kampanja");
+        Campaign c2 = new Campaign("Nova kampanja 1", Theme.FANTASY, GameplayStyle.PUZZLE_SOLVING, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
+        Campaign c3 = new Campaign("Nova kampanja 1", Theme.FANTASY, GameplayStyle.ROLE_PLAYING, Long.parseLong("70"), 4, Level.MEDIUM, "Ovo je moja nova prekul kampanja");
         ksession.insert(c1);
         ksession.insert(c2);
         ksession.insert(c3);

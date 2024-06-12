@@ -65,18 +65,18 @@ then
     });
 
     int j = 0;
-    List<Campaign> top5 = new ArrayList<>();
+    List<Campaign> top12 = new ArrayList<>();
     for (Object o : $campaignMatches) {
         CampaignMatch cm = (CampaignMatch) o;
-        top5.add(cm.getCampaign());
+        top12.add(cm.getCampaign());
         j++;
-        if (j >= 5) {
+        if (j >= 12) {
             break;
         }
     }
 
     searchResults.clear();
-    searchResults.addAll(top5);
+    searchResults.addAll(top12);
 end
 
 

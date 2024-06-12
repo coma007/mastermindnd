@@ -7,15 +7,22 @@ import { ApiService } from '../api/ApiService';
 const CampaignsPage = () => {
     const location = useLocation();
     const type = new URLSearchParams(location.search).get('type');
-    const [campaigns, setCampaigns] = useState([]);
+    const [campaigns, setCampaigns] = useState<any[]>([]);
 
     useEffect(() => {
-        const fetchCampaigns = async () => {
-            const campaignsData = await ApiService.getCampaigns(type!);
-            setCampaigns(campaignsData);
-        };
+        if (type === "search") {
+            const state = location.state as { campaigns: any[] };
+            if (state && state.campaigns) {
+                setCampaigns(state.campaigns);
+            }
+        } else {
+            const fetchCampaigns = async () => {
+                const campaignsData = await ApiService.getCampaigns(type!);
+                setCampaigns(campaignsData);
+            };
 
-        fetchCampaigns();
+            fetchCampaigns();
+        }
     }, [type]);
 
     return (
