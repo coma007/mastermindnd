@@ -5,6 +5,7 @@ import com.ftn.sbnz.model.events.ThemeQuery;
 import com.ftn.sbnz.model.models.Campaign;
 import com.ftn.sbnz.model.models.CampaignTheme;
 import com.ftn.sbnz.model.models.enums.Theme;
+import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,7 +24,7 @@ public class CampaignService {
     @Autowired
     private KieSession kieSession;
     @Autowired
-    private KieSession kieSessionTheme;
+    private KieContainer kieContainer;
     @Autowired
     private ICampaignThemeRepository campaignThemeRepository;
 
@@ -47,6 +48,7 @@ public class CampaignService {
     }
 
     public List<Campaign> findByTheme(Theme t) {
+        KieSession kieSessionTheme = kieContainer.newKieSession("themeFinder");
         List<Campaign> campaigns = new ArrayList<>();
         List<String> results = new ArrayList<>();
         ThemeQuery q = new ThemeQuery();

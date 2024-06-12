@@ -35,17 +35,17 @@ public class KSessionInitializer implements ApplicationRunner {
 
 
         // Get all campaigns
-        for (Campaign c : campaignRepository.findAll()) {
-            kieSession.insert(c);
-        }
+//        for (Campaign c : campaignRepository.findAll()) {
+//            kieSession.insert(c);
+//        }
 
         // Get all users
-        for (User u : userRepository.findAll()) {
-            kieSession.insert(u);
-            kieSession.insert(u.getHistory());
-            kieSession.insert(u.getPreference());
-            kieSession.insert(u.getWishlist());
-        }
+//        for (User u : userRepository.findAll()) {
+//            kieSession.insert(u);
+//            kieSession.insert(u.getHistory());
+//            kieSession.insert(u.getPreference());
+//            kieSession.insert(u.getWishlist());
+//        }
 
     }
 

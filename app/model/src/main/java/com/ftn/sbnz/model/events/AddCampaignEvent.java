@@ -3,6 +3,7 @@ package com.ftn.sbnz.model.events;
 import com.ftn.sbnz.model.events.enums.AddCampaignType;
 import com.ftn.sbnz.model.models.Campaign;
 import com.ftn.sbnz.model.models.User;
+import org.kie.api.definition.type.Expires;
 import org.kie.api.definition.type.Role;
 import org.kie.api.definition.type.Timestamp;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 
 @Role(Role.Type.EVENT)
 @Timestamp("timestamp")
+@Expires("30d")
 public class AddCampaignEvent {
     private Long id;
     private Campaign campaign;

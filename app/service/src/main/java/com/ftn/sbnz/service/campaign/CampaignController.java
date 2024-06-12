@@ -26,8 +26,8 @@ public class CampaignController {
     }
 
     @GetMapping("/themeSearch")
-    public ResponseEntity<List<CampaignDTO>> searchByTheme(@RequestParam Theme theme) {
-        List<Campaign> campaigns = service.findByTheme(theme);
+    public ResponseEntity<List<CampaignDTO>> searchByTheme(@RequestParam String theme) {
+        List<Campaign> campaigns = service.findByTheme(Theme.valueOf(theme.toUpperCase()));
         List<CampaignDTO> dtos = new ArrayList<>();
         for (Campaign c : campaigns) {
             dtos.add(new CampaignDTO(c));
