@@ -12,5 +12,6 @@ public enum CharacterClass {
     ROGUE,
     WARLOCK,
     SORCERER,
-    MONK
+    MONK;
+
 }

@@ -10,5 +10,6 @@ public enum Theme {
     SURVIVAL,
     HIGH_SEAS,
     URBAN,
-    HISTORICAL
+    HISTORICAL;
+
 }

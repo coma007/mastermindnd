@@ -1,9 +1,13 @@
 package com.ftn.sbnz.service.user;
 
 import com.ftn.sbnz.model.events.AddCampaignEvent;
+import com.ftn.sbnz.model.events.SearchEvent;
 import com.ftn.sbnz.model.events.enums.AddCampaignType;
 import com.ftn.sbnz.model.models.Campaign;
+import com.ftn.sbnz.model.models.CampaignMatch;
+import com.ftn.sbnz.model.models.SearchData;
 import com.ftn.sbnz.model.models.User;
+import com.ftn.sbnz.model.models.enums.*;
 import com.ftn.sbnz.service.campaign.CampaignService;
 import com.ftn.sbnz.service.kie_session.KSessionService;
 import org.kie.api.runtime.KieSession;
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserActivityService {
@@ -121,5 +126,28 @@ public class UserActivityService {
             default:
                 return new ArrayList<>();
         }
+    }
+
+    public List<Campaign> searchCampaigns(SearchData data, Long userId) {
+        User user = repository.findById(userId).orElse(null);
+        if (user == null) return List.of();
+
+        KieSession session = userActivityServiceSession.getUserActivitySession();
+        session.insert(data);
+
+        List<Campaign> searchResults = new ArrayList<>();
+        session.setGlobal("searchResults", searchResults);
+
+        SearchEvent searchEvent = new SearchEvent(data);
+        session.insert(searchEvent);
+
+        List<Campaign> campaigns = campaignService.findAll();
+        for (Campaign c : campaigns) {
+            session.insert(c);
+        }
+
+        session.fireAllRules();
+
+        return searchResults;
     }
 }

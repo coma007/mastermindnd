@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/CampaignSearch.css'; // Assuming you have a CSS file for styling the form
+import { SearchData } from '../api/ApiTypes';
+import { ApiService } from '../api/ApiService';
 
-
-interface FormData {
-    themes: string[];
-    level: string[];
-    gameplayStyle: string[];
-    characterClass: string[];
-    characterRace: string[];
-    duration: string[];
-    partySize: string[];
-}
 
 const CampaignSearch = () => {
-    const [formData, setFormData] = useState<FormData>({
-        themes: [],
+
+    const [formData, setFormData] = useState<SearchData>({
+        theme: [],
         level: [],
         gameplayStyle: [],
         characterClass: [],
@@ -25,30 +18,40 @@ const CampaignSearch = () => {
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, type, checked } = event.target;
-        if (type === 'checkbox' && checked) {
-            setFormData(prevState => ({
-                ...prevState,
-                [name]: [...prevState[name as keyof FormData], value]
-            }));
-        } else if (type === 'checkbox' && !checked) {
-            setFormData(prevState => ({
-                ...prevState,
-                [name]: prevState[name as keyof FormData].filter(item => item !== value)
-            }));
-        } else {
-            setFormData(prevState => ({
-                ...prevState,
-                [name]: [value]
-            }));
-        }
-        console.log(formData)
+
+        setFormData(prevState => {
+            const prevValues = prevState[name as keyof SearchData] as string[] || [];
+            if (type === 'checkbox') {
+                if (checked) {
+                    return {
+                        ...prevState,
+                        [name]: [...prevValues, value]
+                    };
+                } else {
+                    return {
+                        ...prevState,
+                        [name]: prevValues.filter(item => item !== value)
+                    };
+                }
+            } else {
+                return {
+                    ...prevState,
+                    [name]: [value]
+                };
+            }
+        });
+
     };
 
-    const handleSubmit = (event: any) => {
+    useEffect(() => {
+        console.log(formData);
+    }, [formData])
+
+    const handleSubmit = async (event: any) => {
         event.preventDefault();
-        // Construct the request payload
+
         const payload = {
-            themes: formData.themes,
+            theme: formData.theme,
             level: formData.level,
             gameplayStyle: formData.gameplayStyle,
             characterClass: formData.characterClass,
@@ -56,6 +59,8 @@ const CampaignSearch = () => {
             duration: formData.duration,
             partySize: formData.partySize
         };
+
+        await ApiService.searchCampaigns(payload)
 
         // Example: Send request using fetch API
     };

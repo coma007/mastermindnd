@@ -5,4 +5,5 @@ public enum CharacterCategory {
     NON_PLAYER_CHARACTER,
     CREATURE,
     DEITY;
+
 }

@@ -1,14 +1,14 @@
 package com.ftn.sbnz.service.tests;
 
 import com.ftn.sbnz.model.events.AddCampaignEvent;
+import com.ftn.sbnz.model.events.SearchEvent;
 import com.ftn.sbnz.model.events.ThemeQuery;
 import com.ftn.sbnz.model.events.enums.AddCampaignType;
-import com.ftn.sbnz.model.models.Campaign;
-import com.ftn.sbnz.model.models.CampaignTheme;
-import com.ftn.sbnz.model.models.User;
+import com.ftn.sbnz.model.models.*;
 import com.ftn.sbnz.model.models.enums.GameplayStyle;
 import com.ftn.sbnz.model.models.enums.Level;
 import com.ftn.sbnz.model.models.enums.Theme;
+import com.ftn.sbnz.model.models.SearchData;
 import org.junit.Test;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
@@ -17,6 +17,7 @@ import org.kie.api.time.SessionClock;
 import org.kie.api.time.SessionPseudoClock;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -59,6 +60,45 @@ public class CEPConfigTest {
 
         assert u.getHistory().isRecommendedThisMonth();
         assert u.getRecommendedCampaigns().size() == 1;
+    }
+
+    @Test
+    public void testSearch() {
+
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kContainer = ks.getKieClasspathContainer();
+        KieSession ksession = kContainer.newKieSession("userActivity");
+
+        SearchData searchData = new SearchData();
+        searchData.setTheme(Arrays.asList("Fantasy", "Sci-Fi"));
+        searchData.setLevel(Arrays.asList("Beginner", "Intermediate"));
+        searchData.setGameplayStyle(Arrays.asList("Role-playing", "Combat"));
+        searchData.setDuration(Arrays.asList("1-2 hours", "2-4 hours"));
+        searchData.setPartySize(Arrays.asList("2"));
+
+        Campaign c1 = new Campaign("Nova kampanja 1", Theme.FANTASY, GameplayStyle.COMBAT_FOCUSED, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
+        Campaign c2 = new Campaign("Nova kampanja 1", Theme.HISTORICAL, GameplayStyle.PUZZLE_SOLVING_AND_ENVIRONMENTAL_CHALLENGES, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
+        Campaign c3 = new Campaign("Nova kampanja 1", Theme.WAR, GameplayStyle.ROLE_PLAYING_AND_CHARACTER_DRIVEN, Long.parseLong("70"), 4, Level.EASY, "Ovo je moja nova prekul kampanja");
+        Campaign c4 = new Campaign("Nova kampanja 1", Theme.MYSTERY, GameplayStyle.ROLE_PLAYING_AND_CHARACTER_DRIVEN, Long.parseLong("70"), 4, Level.MEDIUM, "Ovo je moja nova prekul kampanja");
+        Campaign c5 = new Campaign("Nova kampanja 1", Theme.POLITICAL_INTRIGUE, GameplayStyle.ROLE_PLAYING_AND_CHARACTER_DRIVEN, Long.parseLong("70"), 4, Level.MEDIUM, "Ovo je moja nova prekul kampanja");
+        Campaign c6 = new Campaign("Nova kampanja 1", Theme.URBAN, GameplayStyle.ROLE_PLAYING_AND_CHARACTER_DRIVEN, Long.parseLong("70"), 4, Level.HARD, "Ovo je moja nova prekul kampanja");
+
+        List<CampaignMatch> searchResults = new ArrayList<>();
+        ksession.setGlobal("searchResults", searchResults);
+
+        SearchEvent searchEvent = new SearchEvent(searchData);
+        ksession.insert(searchEvent);
+
+        ksession.insert(c1);
+        ksession.insert(c2);
+        ksession.insert(c3);
+        ksession.insert(c4);
+        ksession.insert(c5);
+        ksession.insert(c6);
+
+        ksession.fireAllRules();
+
+        System.out.println(searchResults.size());
     }
 
     @Test
